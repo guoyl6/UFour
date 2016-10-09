@@ -1,4 +1,5 @@
 /*
+    require jQuery
     an execute:
         beforeStart -> start -> afterStart -> beforeEnd -> end -> afterEnd
 */
