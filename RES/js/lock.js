@@ -1,5 +1,5 @@
 /*
-    require　E.js
+	require E.js
 */
 
 (function($) {
@@ -14,14 +14,13 @@
 		var self = this,
 			e = new E(),
 			obj = {};
-		e.beforeStart(function() {
+		return e.beforeStart(function() {
 			return self.triggerAndGetResult("locking", obj);
 		}).start(function() {
 			return self.triggerAndGetResult("locked", obj);
 		}).end(function() {
 			return self.triggerAndGetResult("unlock", obj);
 		}).exec();
-		return deferred;
 	}
 
 })(jQuery);
