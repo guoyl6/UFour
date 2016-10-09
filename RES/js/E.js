@@ -10,7 +10,7 @@ function E() {
 	this.endExec = [];
 }
 
-E.prototype.addExec = function(array, func) {
+E.prototype.addFunc = function(array, func) {
 	if (jQuery.type(func) === "function" && jQuery.type(array) === "array") {
 		array.push(func);
 	}
@@ -18,15 +18,15 @@ E.prototype.addExec = function(array, func) {
 }
 
 E.prototype.beforeStart = function(func) {
-	return this.addExec(this.beforeStartExec, func);
+	return this.addFunc(this.beforeStartExec, func);
 }
 
 E.prototype.start = function(func) {
-	return this.addExec(this.start, func);
+	return this.addFunc(this.start, func);
 }
 
 E.prototype.end = function(func) {
-	return this.addExec(this.end, func);
+	return this.addFunc(this.end, func);
 }
 
 E.prototype.exec = function(data) {
