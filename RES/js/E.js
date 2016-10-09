@@ -1,44 +1,63 @@
 /*
     an execute:
-        beforeStart -> start -> end
+        beforeStart -> start -> afterStart -> beforeEnd -> end -> afterEnd
 */
 
-function E() {
-	this.deferred = jQuery.Deferred();
-	this.beforeStartExec = [];
-	this.startExec = [];
-	this.endExec = [];
-}
+function E(obj) {
+	this.init(obj);
+};
 
 E.prototype.addFunc = function(array, func) {
 	if (jQuery.type(func) === "function" && jQuery.type(array) === "array") {
 		array.push(func);
 	}
 	return this;
-}
+};
 
-E.prototype.beforeStart = function(func) {
-	return this.addFunc(this.beforeStartExec, func);
-}
+(function() {
+	var turple = ["beforeStart", "start", "afterStart",
+				  "beforeEnd", "end", "afterEnd"];
 
-E.prototype.start = function(func) {
-	return this.addFunc(this.startExec, func);
-}
+	// bind addFunc for each step
+	turple.forEach(function(ev) {
+		E.prototype[ev] = function(func) {
+			return this.addFunc(this[ev+"Exec"], func);
+		}
+	})
 
-E.prototype.end = function(func) {
-	return this.addFunc(this.endExec, func);
-}
+	E.prototype.init = function(obj) {
 
-E.prototype.exec = function(data) {
-	var deferred = jQuery.Deferred(), t = deferred;
-	[].concat(this.beforeStartExec)
-	  .concat(this.startExec)
-	  .concat(this.endExec)
-	  .forEach(function(func) {
-	  	t = t.then(func);
-	  })
-	setTimeout(function() {
-		deferred.resolve(data);
-	});
-	return t;
-}
+		// create an array to storage function for each event
+		turple.forEach(function(ev) {
+			this[ev+"Exec"] = [];
+		}.bind(this));
+
+		if (jQuery.type(obj) === "object") {
+
+			turple.forEach(function(ev) {
+				this[ev](obj[ev]);
+			}.bind(this));
+
+		}
+	}
+	E.prototype.exec = function(data) {
+		var deferred = jQuery.Deferred(), promise = deferred.promise();
+		var funcs = [];
+
+		turple.forEach(function(ev) {
+			funcs = funcs.concat(this[ev+"Exec"]);
+		}.bind(this));
+
+		funcs.forEach(function(func) {
+			promise = promise.then(function() {
+		  		return func.call(this, data);
+		  	});
+		});
+
+		setTimeout(function() {
+			deferred.resolve();
+		});
+
+		return promise;
+	}
+})();
