@@ -1,5 +1,6 @@
 /*
 	require E.js
+	tolock -> locking -> locked -> toUnlock -> unlocking -> unlocked
 */
 
 (function($) {
@@ -12,15 +13,27 @@
 
 	$.fn.lock = function() {
 		var self = this,
-			e = new E(),
-			obj = {};
-		return e.beforeStart(function() {
-			return self.triggerAndGetResult("locking", obj);
-		}).start(function() {
-			return self.triggerAndGetResult("locked", obj);
-		}).end(function() {
-			return self.triggerAndGetResult("unlock", obj);
-		}).exec();
+			ev = {
+				"beforeStart": "toLock",
+				"start": "locking",
+				"afterStart": "locked",
+				"beforeEnd": "toUnlock",
+				"end": "unlocking",
+				"afterEnd": "unlocked"
+			};
+		var handlers = {};
+		for (var i in ev) {
+
+			handlers[i] = (function(e) {
+				return function(obj) {
+					var result = self.triggerAndGetResult(e, obj);
+					return result;
+				}
+			})(ev[i]);
+			
+		}
+
+		return new E(handlers).exec({});
 	}
 
 })(jQuery);
