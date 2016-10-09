@@ -3,6 +3,7 @@
 */
 
 (function($) {
+	
 	$.fn.triggerAndGetResult = function(event, data) {
 		var obj = {};
 		data = $.makeArray(obj, data);
