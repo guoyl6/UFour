@@ -1,6 +1,5 @@
 /*
 	require E.js
-	tolock -> locking -> locked -> toUnlock -> unlocking -> unlocked
 */
 
 (function($) {
@@ -11,7 +10,7 @@
 		return obj.result;
 	}
 
-	$.fn.lock = function() {
+	$.fn.lock = function(opt) {
 		var self = this,
 			ev = {
 				"beforeStart": "toLock",
@@ -33,7 +32,7 @@
 			
 		}
 
-		return new E(handlers).exec({});
+		return new E(handlers).afterStart(opt).exec({});
 	}
 
 })(jQuery);
