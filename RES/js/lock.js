@@ -3,10 +3,11 @@
 */
 
 (function($) {
-	$.fn.triggerAndGetResult = function(event, obj) {
-		obj = obj || {};
+	$.fn.triggerAndGetResult = function(event, args) {
+		obj = args[0] || {};
+		args[0] = obj;
 		obj.result = undefined;
-		this.trigger(event, [obj]);
+		this.trigger(event, args);
 		return obj.result;
 	}
 
@@ -24,8 +25,8 @@
 		for (var i in ev) {
 
 			handlers[i] = (function(e) {
-				return function(obj) {
-					var result = self.triggerAndGetResult(e, obj);
+				return function() {
+					var result = self.triggerAndGetResult(e, $.makeArray(arguments));
 					return result;
 				}
 			})(ev[i]);
