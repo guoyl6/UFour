@@ -1,5 +1,4 @@
 /*
-    require jQuery
     an execute:
         beforeStart -> start -> afterStart -> beforeEnd -> end -> afterEnd
 */
@@ -51,7 +50,9 @@ E.prototype.addFunc = function(array, func) {
 
 		funcs.forEach(function(func) {
 			promise = promise.then(function() {
-		  		return func.call(this, data);
+				var args = jQuery.makeArray(arguments);
+				args.unshift(data);
+		  		return func.apply(this, args);
 		  	});
 		});
 
