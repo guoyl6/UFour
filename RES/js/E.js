@@ -48,6 +48,15 @@ E.prototype.addFunc = function(array, func) {
 			funcs = funcs.concat(this[ev+"Exec"]);
 		}.bind(this));
 
+		// to deliver data
+		funcs.push(function() {
+			var t = $.Deferred(), args = arguments;
+			setTimeout(function() {
+				t.resolveWith(t, args);
+			})
+			return t.promise();
+		})
+
 		funcs.forEach(function(func) {
 			promise = promise.then(function() {
 				var args = jQuery.makeArray(arguments);
@@ -63,3 +72,4 @@ E.prototype.addFunc = function(array, func) {
 		return promise;
 	}
 })();
+
