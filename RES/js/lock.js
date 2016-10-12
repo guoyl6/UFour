@@ -4,7 +4,7 @@
 
 (function($) {
 	$.fn.triggerAndGetResult = function(event, args) {
-		obj = args[0] || {};
+		var obj = args[0] || {};
 		args[0] = obj;
 		obj.result = undefined;
 		this.trigger(event, args);
