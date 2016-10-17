@@ -104,7 +104,7 @@ bs.prototype.addExec = function(self, fns) {
 	fns.forEach(function(fn) {
 		self.calls.push(fn);
 	}.check(function(fn) {
-		return typeof fn === "function";
+		return typeof fn === "function" || fn instanceof bs;
 	}))
 }.addSelf().returnSelf().withArrayLikeArguments();
 
@@ -117,6 +117,10 @@ bs.prototype.exec = function(self, args) {
 		}
 	}
 	self.calls.forEach(function(fn) {
+		if (fn instanceof bs) {
+			return fn.exec.apply(fn, args);
+		}
+		
 		fn.apply(self, args);
 	})
 }.addSelf().withArrayLikeArguments();
