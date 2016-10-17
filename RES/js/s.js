@@ -108,7 +108,7 @@ bs.prototype.addExec = function(self, fns) {
 	}))
 }.addSelf().returnSelf().withArrayLikeArguments();
 
-bs.prototype.exec = function(self) {
+bs.prototype.exec = function(self, args) {
 	var isAllGood = true;
 	for (var i = self.cares.length; i--;) {
 		if (!self.cares[i].isGood()) {
@@ -117,9 +117,9 @@ bs.prototype.exec = function(self) {
 		}
 	}
 	self.calls.forEach(function(fn) {
-		fn();
+		fn.apply(self, args);
 	})
-}.addSelf();
+}.addSelf().withArrayLikeArguments();
 
 /*
 	test:
