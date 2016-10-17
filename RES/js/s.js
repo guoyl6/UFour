@@ -1,7 +1,13 @@
 /* require fn.js */
 
-function s() {
+
+function s(initState) {
 	this.state = {};
+	if (typeof initState === "object") {
+		for (var i in initState) {
+			this.add(i, initState[i]);
+		}
+	}
 }
 
 s.prototype.add = function (self, stateName, value) {
