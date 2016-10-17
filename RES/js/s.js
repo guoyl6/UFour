@@ -66,6 +66,15 @@ s.prototype.child = function(self, states) {
 	return child;
 }.addSelf().withArrayLikeArguments();
 
+s.prototype.antiChild = function(self, states) {
+	var child = self.child.apply(self, states);
+	child.isGood = function() {
+		return !s.prototype.isGood.apply(self, states);
+	}
+	return child;
+}.addSelf().withArrayLikeArguments();
+
+
 /*
 	test s:
 		var s1 = new s(), t = 0;
