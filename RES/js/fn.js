@@ -36,8 +36,8 @@
 	fp.withArrayLikeArguments = function () {
 		var func = this, extras = slice.apply(arguments);
 		return function () {
-			var args = slice.apply(arguments);
-			extras.push(args);
+			var args = extras.slice();
+			args.push(slice.apply(arguments));
 			return apply.call(this, func, extras, undefined);
 		}
 	}
