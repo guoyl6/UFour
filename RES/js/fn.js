@@ -38,7 +38,7 @@
 		return function () {
 			var args = extras.slice();
 			args.push(slice.apply(arguments));
-			return apply.call(this, func, extras, undefined);
+			return apply.call(this, func, args, undefined);
 		}
 	}
 })();
