@@ -1,13 +1,8 @@
 /* require fn.js */
 
-
 function s(initState) {
 	this.state = {};
-	if (typeof initState === "object") {
-		for (var i in initState) {
-			this.add(i, initState[i]);
-		}
-	}
+	this.setStatesFrom(initState);
 }
 
 s.prototype.add = function (self, stateName, value) {
@@ -28,12 +23,20 @@ s.prototype.get = function (self, stateName) {
 	}
 }.addSelf();
 
+s.prototype.setStatesFrom = function (self, stateObj) {
+	for (var i in stateObj) {
+		self.set(i, stateObj[i]);
+	}
+}.addSelf().check(function (obj) {
+	return typeof obj === "object";
+}).returnSelf();
+
 s.prototype.clear = function (self, args) {
 	// s.clear(state1, state2....)
 	if (!args.length) {
 		self.state = {};
 	} else {
-		args.forEach(function(stateName) {
+		args.forEach(function (stateName) {
 			if (stateName && stateName in self.state) {
 				delete self.state[stateName];
 			}
@@ -47,7 +50,7 @@ s.prototype.isGood = function (self, args) {
 	var isGood = true, checked = self.state;
 	if (args.length) {
 		checked = {};
-		args.forEach(function(stateName) {
+		args.forEach(function (stateName) {
 			checked[stateName] = true;
 		})
 	}
@@ -60,31 +63,30 @@ s.prototype.isGood = function (self, args) {
 }.addSelf().withArrayLikeArguments();
 
 
-s.prototype.child = function(self, states) {
+s.prototype.child = function (self, states) {
 	var child = new s();
 	var unbindTurple = ["clear", "set", "get", "add", "child"];
-	unbindTurple.forEach(function(pn) {
+	unbindTurple.forEach(function (pn) {
 		child[pn] = null;
 	});
-	child.isGood = function() {
+	child.isGood = function () {
 		return s.prototype.isGood.apply(self, states);
 	}
 	return child;
 }.addSelf().withArrayLikeArguments();
 
-s.prototype.antiChild = function(self, states) {
+s.prototype.antiChild = function (self, states) {
 	var child = self.child.apply(self, states);
-	child.isGood = function() {
+	child.isGood = function () {
 		return !s.prototype.isGood.apply(self, states);
 	}
 	return child;
 }.addSelf().withArrayLikeArguments();
 
-
 /*
 	test s:
 		var s1 = new s(), t = 0;
-		s1.add("start", false).add("tLargerThanTen", function() {return t > 10});
+		s1.add("start", false).add("tLargerThanTen", function () {return t > 10});
 		s1.add("hello", true);
 		console.log(s1.get("start"), s1.get("tLargerThanTen"), s1.get("hello"), s1.isGood());
 		s1.set("start", true);
@@ -107,23 +109,23 @@ var bs = function (self, fns) {
 	self.addExec.apply(self, fns);
 }.addSelf().withArrayLikeArguments();
 
-bs.prototype.care = function(self, states) {
-	states.forEach(function(state) {
+bs.prototype.care = function (self, states) {
+	states.forEach(function (state) {
 		self.cares.push(state);
-	}.check(function(state) {
+	}.check(function (state) {
 		return state instanceof s;
 	}))
 }.addSelf().returnSelf().withArrayLikeArguments();
 
-bs.prototype.addExec = function(self, fns) {
-	fns.forEach(function(fn) {
+bs.prototype.addExec = function (self, fns) {
+	fns.forEach(function (fn) {
 		self.calls.push(fn);
-	}.check(function(fn) {
+	}.check(function (fn) {
 		return typeof fn === "function" || fn instanceof bs;
 	}))
 }.addSelf().returnSelf().withArrayLikeArguments();
 
-bs.prototype.exec = function(self, args) {
+bs.prototype.exec = function (self, args) {
 	var isAllGood = true;
 	for (var i = self.cares.length; i--;) {
 		if (!self.cares[i].isGood()) {
@@ -131,11 +133,11 @@ bs.prototype.exec = function(self, args) {
 			return;
 		}
 	}
-	self.calls.forEach(function(fn) {
+	self.calls.forEach(function (fn) {
 		if (fn instanceof bs) {
 			return fn.exec.apply(fn, args);
 		}
-		
+
 		fn.apply(self, args);
 	})
 }.addSelf().withArrayLikeArguments();
@@ -145,7 +147,7 @@ bs.prototype.exec = function(self, args) {
 		var b = new bs();
 		var s1 = new s(), s2 = new s();
 		s1.add("mousedown", false); s2.add("mouseup", false);
-		b.addExec(function() {console.log("hello");}, function() {console.log("hello 2");}).care(s1, s2);
+		b.addExec(function () {console.log("hello");}, function () {console.log("hello 2");}).care(s1, s2);
 		b.exec();
 		s1.set("mousedown", true);
 		b.exec();
