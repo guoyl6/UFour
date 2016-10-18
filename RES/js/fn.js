@@ -7,6 +7,7 @@
 		// console.log(func, args, ctx);
 		return func.apply(getContext(this, ctx), args);
 	}
+
 	var getContext = function (defaultCtx, ctx) {
 		if (typeof ctx === "undefined") {
 			return defaultCtx;
@@ -14,12 +15,14 @@
 			return ctx;
 		}
 	}
+
 	fp.addSelf = function (ctx) {
 		return function (func, args) {
 			args.unshift(this);
 			return apply.call(this, func, args, ctx);
 		}.withArrayLikeArguments(this);
 	}
+
 	fp.check = function (fn, ctx) {
 		return function (func, args) {
 			if (apply.call(this, fn, args, ctx)) {
@@ -27,12 +30,14 @@
 			}
 		}.withArrayLikeArguments(this);
 	}
+
 	fp.returnSelf = function (ctx) {
 		return function (func, args) {
 			apply.call(this, func, args, ctx);
 			return this;
 		}.withArrayLikeArguments(this);
 	}
+
 	fp.withArrayLikeArguments = function () {
 		var func = this, extras = slice.apply(arguments);
 		return function () {
@@ -128,5 +133,63 @@
 		});
 	}
 
+	fp.timeout = function(delay, args, ctx) {
+		delay = delay > 0 ? : delay : 0;
+		args = args || [];
+		var t = setTimeout(function() {
+			this.apply(ctx, args);
+		}.bind(this), delay);
+		ctx = ctx || t;
+		return t;
+	}
+
+	fp.interval = function(delay, args, ctx) {
+		delay = delay > 0 ? : delay : 0;
+		args = args || [];
+		var t = setInterval(function() {
+			this.apply(ctx, args);
+		}.bind(this), delay);
+		ctx = ctx || t;
+		return t;
+	}
+
+	fp.loop = function(whenToStop, option) {
+		if (typeof whenToStop === "number") {
+			var count = whenToStop;
+			whenToStop = function() {
+				return count-- <= 0;
+			}
+		}
+
+		option = option || {
+			sync: false,
+			delay: 0,
+			args: [],
+			ctx: this
+		}
+
+		var sync = option.sync || false,
+			delay = option.delay,
+			args = option.args || [],
+			ctx = option.ctx || this;
+		if (sync) {
+			while (!whenToStop.apply(ctx, args)) {
+				this.apply(ctx, args);
+			}
+		} else {
+			var t = function() {
+				var shouldStop = whenToStop.apply(ctx, args);
+				if (!shouldStop) {
+					this.apply(ctx, args);
+				} else {
+					clearInterval(t);
+				}
+			}.interval(delay, args, this);
+			ctx = option.ctx || t;
+			return t;
+		}
+	}.check(function(whenToStop, option) {
+		return typeof whenToStop === "function" || typeof whenToStop == "number";
+	})
 
 })();
