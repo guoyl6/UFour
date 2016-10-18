@@ -1,6 +1,6 @@
 #[js](js/)  
 * [fn.js](js/fn.js)  
-    *function.debounce(delay, immediately)*
+    *function.debounce(delay, immediately, tail)*
     ![debounce](js/debounce.png)
     *function.throttle(delay, immediately, tail)*
     ![throttle](js/throttle.png)
