@@ -1,11 +1,11 @@
 #[js](js/)  
-* [fn.js](js/fn.js)
+* [fn.js](js/fn.js)  
     *function.debounce(delay, immediately, tail)*
-    ![debounce](js/debounce.png)
+        ![debounce](js/debounce.png)
     *function.throttle(delay, immediately, tail)*
-    ![throttle](js/throttle.png)
+        ![throttle](js/throttle.png)
     *funtion.loop(whenToStop, option)
-        * whenToStop:  
+        - whenToStop:  
             * number: times to loop  
             * function: return true if the operation should be stopped  
         * option: {  
