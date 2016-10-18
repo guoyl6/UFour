@@ -1,8 +1,8 @@
 #[js](js/)  
 * [fn.js](js/fn.js)  
-    *function.debounce(delay, immediately, tail)*
+  * function.debounce(delay, immediately, tail)
         ![debounce](js/debounce.png)
-    *function.throttle(delay, immediately, tail)*
+  * function.throttle(delay, immediately, tail)
         ![throttle](js/throttle.png)
     *funtion.loop(whenToStop, option)
         - whenToStop:  
