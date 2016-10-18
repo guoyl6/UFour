@@ -1,4 +1,4 @@
 #RES
-* js
-    fn.js
+* js  
+    - fn.js
     ![debounce](RES/js/debounce.png)
