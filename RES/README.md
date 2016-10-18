@@ -1,6 +1,6 @@
-#[js](RES/js/)  
+#[js](js/)  
 * [fn.js](js/fn.js)
     *function.debounce(delay, immediately)*
-    ![debounce](RES/js/debounce.png)
+    ![debounce](js/debounce.png)
     *function.throttle(delay, immediately, tail)*
-    ![throttle](RES/js/throttle.png)
+    ![throttle](js/throttle.png)
