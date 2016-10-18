@@ -56,7 +56,7 @@
 				diff = now - (!debounce ? lastExecTime : now) - delay;
 				diff = diff < 0 ? -diff : 0;
 			}
-			if (tail || !diff || debounce) {
+			if (tail || !diff) {
 				// console.log(diff);
 				next = setTimeout(function () {
 					exec.apply(this, args);
@@ -94,7 +94,7 @@
 				}
 			} else {
 				if (debounce) {
-					if (!immediately) {
+					if (tail) {
 						nextOff();
 						nextOn.apply(this, arguments);
 					}
@@ -106,11 +106,15 @@
 		};
 	}
 
-	fp.debounce = function (delay, immediately) {
+	fp.debounce = function (delay, immediately, tail) {
+		if (arguments.length < 2) {
+			tail = true;
+		}
 		return _throttle(this, {
 			immediately: immediately,
 			delay: delay,
-			debounce: true
+			debounce: true,
+			tail: tail
 		})
 	}
 
@@ -123,5 +127,6 @@
 			tail: tail
 		});
 	}
+
 
 })();
