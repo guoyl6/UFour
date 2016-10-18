@@ -1,5 +1,4 @@
-# UFour
-##RES
-* js
-    * fn.js
+#RES
+*js
+    - fn.js
     ![debounce](RES/js/debounce.png)
