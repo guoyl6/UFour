@@ -133,23 +133,38 @@
 		});
 	}
 
+	fp.delay = function(args, ctx) {
+		var func = this;
+		return function() {
+			args = args || arguments;
+			apply.call(this, func, args, ctx);
+		};
+	}
+
+	fp.after = function(fn) {
+		var func = this;
+		return function() {
+			apply.call(this, fn, arguments);
+			return apply.call(this, func, arguments);
+		};
+	}
+
+	fp.before = function(fn) {
+		return fn.after(this);
+	}
+
+
 	fp.timeout = function(delay, args, ctx) {
-		delay = delay > 0 ? : delay : 0;
+		delay = delay > 0 ? delay : 0;
 		args = args || [];
-		var t = setTimeout(function() {
-			this.apply(ctx, args);
-		}.bind(this), delay);
-		ctx = ctx || t;
+		var t = setTimeout(this.delay(args, ctx), delay);
 		return t;
 	}
 
 	fp.interval = function(delay, args, ctx) {
-		delay = delay > 0 ? : delay : 0;
+		delay = delay > 0 ? delay : 0;
 		args = args || [];
-		var t = setInterval(function() {
-			this.apply(ctx, args);
-		}.bind(this), delay);
-		ctx = ctx || t;
+		var t = setInterval(this.delay(args, ctx), delay);
 		return t;
 	}
 
@@ -161,35 +176,51 @@
 			}
 		}
 
-		option = option || {
-			sync: false,
+		option = option || {};
+
+		var t =  {
+			sync: true,
 			delay: 0,
 			args: [],
-			ctx: this
+			ctx: undefined,
+			step: null,
+			callback: null
+		};
+
+		for (var i in t) {
+			if (i in option) {
+				t[i] = option[i];
+			}
 		}
 
-		var sync = option.sync || false,
+		option = t;
+
+		var sync = option.sync,
 			delay = option.delay,
-			args = option.args || [],
-			ctx = option.ctx || this;
+			args = option.args,
+			ctx = option.ctx,
+			step = typeof option.step === "function" ? option.step : null,
+			callback = typeof option.callback === "function" ? option.callback : null;
+
 		if (sync) {
 			while (!whenToStop.apply(ctx, args)) {
 				this.apply(ctx, args);
+				step && step.call(ctx, args);
 			}
+			callback && callback.apply(ctx, args);
 		} else {
-			var t = function() {
+			return function() {
 				var shouldStop = whenToStop.apply(ctx, args);
 				if (!shouldStop) {
 					this.apply(ctx, args);
+					step && step.call(ctx, args);
+
 				} else {
 					clearInterval(t);
+					callback && callback.apply(ctx, args);
 				}
 			}.interval(delay, args, this);
-			ctx = option.ctx || t;
-			return t;
 		}
-	}.check(function(whenToStop, option) {
-		return typeof whenToStop === "function" || typeof whenToStop == "number";
-	})
+	}
 
 })();
