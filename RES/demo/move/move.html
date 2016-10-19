@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>move_v2</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		#area {
+			position: relative;
+			width: 1200px;
+			height: 500px;
+			margin: auto;
+		}
+		.wall {
+			position: absolute;
+			background-color: gray;
+		}
+		.first {
+			width: 300px;
+			height: 100px;
+			top: 200px;
+			left: 0px;
+		}
+		.second {
+			width: 100px;
+			height: 300px;
+			top: 0px;
+			left: 300px;
+		}
+		.third {
+			width: 400px;
+			height: 100px;
+			top: 0px;
+			left: 400px;
+		}
+		.fourth {
+			width: 100px;
+			height: 300px;
+			top: 0px;
+			left: 800px;
+		}
+		.fifth {
+			width: 300px;
+			height: 100px;
+			top: 200px;
+			left: 900px;
+		}
+		.sixth {
+			width: 1200px;
+			height: 100px;
+			top: 400px;
+			left: 0px;
+		}
+		.seventh {
+			width: 200px;
+			height: 100px;
+			top: 200px;
+			left: 500px;
+		}
+
+		#block {
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			top: 310px;
+			left: 0px;
+			background-color: rgba(0, 0, 0, 0.3);
+			cursor: pointer;
+			font-size: 0px;
+		}
+		#control {
+			text-align: center;
+			margin: 10px;
+		}
+
+	</style>
+	<script type="text/javascript" src="https://rawgit.com/guoyl6/UFour/master/RES/js/fn.js"></script>
+	<script type="text/javascript" src="https://rawgit.com/guoyl6/UFour/master/RES/js/s.js"></script>
+	<script type="text/javascript" src="move_v2.js"></script>
+</head>
+<body>
+<div id="area">
+	<div id="block"></div>
+	<div class="wall first"></div>
+	<div class="wall second"></div>
+	<div class="wall third"></div>
+	<div class="wall fourth"></div>
+	<div class="wall fifth"></div>
+	<div class="wall sixth"></div>
+	<div class="wall seventh"></div>
+</div>
+<div id="control">
+	<button id="restart">重来</button>
+	<span id="time">0s</span>
+</div>
+</body>
+</html>
