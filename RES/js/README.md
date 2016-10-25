@@ -112,7 +112,7 @@
     -> 1: 2
     -> 2: 3
   */
-```
+```  
 *应用场景*
 ```js
   setTimeout(func.delay(args, ctx));
