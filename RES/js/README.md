@@ -22,35 +22,35 @@
 
 - func.returnSelf(ctx)  
 *返回一个函数，该函数以(ctx || this)为上下文调用func并返回this*  
-```js
-  var t = function() {
-    console.log("in function, this:", this);
-    return "this string will not be returned";
-  }.returnSelf();
-  console.log("return", t());
-  // -> in function, this: Window...
-  // -> return Window...
-  console.log("return", t.call({}));
-  // -> in function, this: {}
-  // -> return {}
-  console.log("return", t.call([]));
-  // -> in function, this: []
-  // -> return []
-  
-  var t2 = function() {
-    console.log("in function, this:", this);
-    return "this string will not be returned";
-  }.returnSelf(["this will be used for context"]);
-  console.log("return", t2());
-  // -> in function, this: ["this will be used for context"]
-  // -> return Window...
-  console.log("return", t2.call({}));
-  // -> in function, this: ["this will be used for context"]
-  // -> return {}
-  console.log("return", t2.call([]));
-  // -> in function, this: ["this will be used for context"]
-  // -> return []
-```
+  ```js
+    var t = function() {
+      console.log("in function, this:", this);
+      return "this string will not be returned";
+    }.returnSelf();
+    console.log("return", t());
+    // -> in function, this: Window...
+    // -> return Window...
+    console.log("return", t.call({}));
+    // -> in function, this: {}
+    // -> return {}
+    console.log("return", t.call([]));
+    // -> in function, this: []
+    // -> return []
+
+    var t2 = function() {
+      console.log("in function, this:", this);
+      return "this string will not be returned";
+    }.returnSelf(["this will be used for context"]);
+    console.log("return", t2());
+    // -> in function, this: ["this will be used for context"]
+    // -> return Window...
+    console.log("return", t2.call({}));
+    // -> in function, this: ["this will be used for context"]
+    // -> return {}
+    console.log("return", t2.call([]));
+    // -> in function, this: ["this will be used for context"]
+    // -> return []
+  ```
 
 - func.withArrayLikeArguments([extras])  
 *返回一个函数，该函数会将所接收到的参数整合成一个数组，接着将该数组作为最后一个参数调用func*  
