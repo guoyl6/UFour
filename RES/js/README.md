@@ -1,4 +1,4 @@
-#[fn.js](#fn.js)
+- [fn.js](#fnjs)
 
 ##[fn.js](./fn.js)
   + function\.debounce\(delay, immediately, tail\)
