@@ -1,6 +1,8 @@
 # Directory
 - [fn.js](#fnjs)
-***
+
+---
+
 ##[fn.js](./fn.js)
 
 给function添加一些常用方法
