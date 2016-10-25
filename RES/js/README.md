@@ -78,11 +78,47 @@
   */
 ```
 
+- func.delay(args, ctx)  
+返回一个函数fn，该函数执行时将以(ctx || this)作为上下文， args作为参数调用func  
+调用方式为apply，因而要求args类型为Array  
+若args为null，则传入func的参数即为fn执行时接收的参数(`args = args || arguments`)
+```js
+  var t = function() {
+    console.log("context:", this);
+    for (var i = 0, len = arguments.length; i < len; i++) {
+      console.log(i + ":", arguments[i]);
+    }
+  }
+  t.delay(null, null)("hello");
+  /*
+    -> context: Window...
+    -> 0: hello
+  */
+  t.delay(null, [])();
+  /*
+    -> context: []
+  */
+  t.delay([1, 2, 3], null)("hello");
+  /*
+    -> context: Window...
+    -> 0: 1
+    -> 1: 2
+    -> 2: 3
+  */
+  t.delay([1, 2, 3], [])();
+  /*
+    -> context: []
+    -> 0: 1
+    -> 1: 2
+    -> 2: 3
+  */
+```
+
 - func.debounce(delay, immediately, tail)  
-返回一个函数，该函数将根据参数决定如何执行func  
+返回一个函数，该函数将根据参数决定如何对func进行节流  
 ![debounce](./debounce.png)
 
 - func.throttle(delay, immediately, tail)  
-返回一个函数，该函数将根据参数决定如何执行func  
+返回一个函数，该函数将根据参数决定如何对func进行频率控制  
 ![throttle](./throttle.png)
 
