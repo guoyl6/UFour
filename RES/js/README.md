@@ -7,7 +7,7 @@
 
 给function添加一些常用方法
 
-- func.addSelf()
+- func.addSelf()  
 返回一个函数，该函数在调用func时并将this作为第一个参数传入
 ```js
   var t = {};
@@ -20,7 +20,7 @@
   
 ```
 
-- func.returnSelf(ctx)
+- func.returnSelf(ctx)  
 返回一个函数，该函数以(ctx || this)为上下文调用func并返回this
 ```js
   var t = function() {
@@ -52,7 +52,7 @@
   // -> return []
 ```
 
-- func.withArrayLikeArguments([extras])
+- func.withArrayLikeArguments([extras])  
 返回一个函数，该函数会将所接收到的参数整合成一个数组，接着将该数组作为最后一个参数调用func
 ```js
   var t = function()  {
@@ -77,3 +77,8 @@
     -> 3: [1, 2, 3]
   */
 ```
+
+- func.debounce(delay, immediately, tail)  
+返回一个函数，该函数将根据参数决定如何执行func  
+![debounce](./debounce.png)
+
