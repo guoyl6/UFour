@@ -1,10 +1,15 @@
+# Directory
 - [fn.js](#fnjs)
-
+***
 ##[fn.js](./fn.js)
-  + function\.debounce\(delay, immediately, tail\)
-    ![debounce](./debounce.png)
-  + function\.throttle\(delay, immediately, tail\)  
-    ![throttle](./throttle.png)
-  + funtion\.loop\(whenToStop, option\)
-    - ***You can use like this:***  
-    ``fn.loop(number | func, { sync: true } | { delay: 10, args: ["hello"], ctx: {} })``  
+
+给function添加一些常用方法
+
+- addSelf()
+返回一个函数，该函数的第一个参数为this
+```js
+  var t = {};
+  t.test = function(self) {console.log(this === self);}.addSelf();
+  t.test();
+  t.test.call([]);
+```
