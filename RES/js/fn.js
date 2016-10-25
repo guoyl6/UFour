@@ -137,7 +137,7 @@
 		var func = this;
 		return function() {
 			args = args || arguments;
-			apply.call(this, func, args, ctx);
+			return apply.call(this, func, args, ctx);
 		};
 	}
 
