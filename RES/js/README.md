@@ -82,3 +82,7 @@
 返回一个函数，该函数将根据参数决定如何执行func  
 ![debounce](./debounce.png)
 
+- func.throttle(delay, immediately, tail)  
+返回一个函数，该函数将根据参数决定如何执行func  
+![throttle](./throttle.png)
+
