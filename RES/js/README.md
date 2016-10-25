@@ -1,6 +1,6 @@
 #[fn.js](#fn.js)
 
-***[fn.js](./fn.js)***
+##[fn.js](./fn.js)
   + function\.debounce\(delay, immediately, tail\)
     ![debounce](./debounce.png)
   + function\.throttle\(delay, immediately, tail\)  
