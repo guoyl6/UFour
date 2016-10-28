@@ -195,8 +195,8 @@
       });
       ac1.exec();
       
-      /*
-        -> {message: "hello ac2"}
+      /*
+        -> { message: "hello ac2" }
       */
       
     ```
