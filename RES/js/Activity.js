@@ -82,6 +82,11 @@
 		this.todo = new _activity();
 		this.after = new _activity();
 	};
+	
+	Activity.prototype.add = function(activity, priority) {
+		this.todo.add(activity, priority);
+		return this;
+	}
 
 	Activity.prototype.getCalls = function(self, args) {
 		var calls = [], tuple = ["before", "todo", "after"];
