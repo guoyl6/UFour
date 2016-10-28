@@ -152,6 +152,7 @@
   
 - 为某个activity添加操作  
   ```js
+    activity.add(func | Activity, priority) // 默认调用activity.todo.add
     activity.before.add(func | Activity, priority);
     activity.todo.add(func | Activity, priority);
     activity.after.add(func | Activity, priority);
