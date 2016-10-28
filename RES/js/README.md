@@ -1,6 +1,7 @@
 # Directory
 - [fn.js](#fnjs)
 - [Activity.js](#activityjs)
+- [s.js](#sjs)
 
 ---
 
@@ -167,7 +168,6 @@
 
   + 若我们想接管activity，只需返回一个Promise  
     ([jQuery.Deferred 相关教程](http://api.jquery.com/category/deferred-object/))  
-    
     ```js
       var deferred = jQuery.Deferred(), activity = new Activity();
       activity.todo.add(function() {
@@ -185,7 +185,6 @@
       
     ```
   + 若我们想在Activity间传递数据，可参考下面代码  
-  
     ```js
       var ac1 = new Activity(), ac2 = new Activity();
       ac1.todo.add(function(data) {
@@ -202,7 +201,6 @@
       
     ```
   + 优先级详解  
-  
     ```js
       var activity = new Activity();
       activity.todo.add(function() {
@@ -219,3 +217,70 @@
       */
 
     ```
+
+---
+
+##[s.js](./s.js)  
+
+- 依赖库  
+  ***require fn.js***
+  
+- 说明  
+  ```js
+    /*
+      一个系统往往有很多种状态，而有时候，当且仅当在某些状态下才能进行相应的操作
+    */
+  ```
+  
+- 创建一个状态集  
+  ```js
+    // 创建一个空状态集
+    var states = new s();
+    // 创建一个状态集 -- 基于已有状态集
+    var states = new s({
+      allowClick: false,
+      allowMove: false,
+      loading: false
+    })
+  ```
+
+- 检查状态集是否是良好态  
+  ```js
+    // 检查全部状态
+    states.isGood();
+    // 检查部分状态
+    states.isGood("allowClick", "allowMove");
+  ```
+
+- 增加某个状态  
+  ```js
+    states.set(stateName, value)
+    /*
+      这里当value是function时，我们在获得其情况时将会进行如下操作：
+        return value.apply(self, [stateName])
+    */
+     states.add 等同于 states.set
+  ```
+
+- 获得某个状态的情况  
+  ```js
+    states.get("allowClick");
+    /*
+      s.prototype.get = function (self, stateName) {
+        var value = self.state[stateName];
+        if (typeof value === "function") {
+          return value.apply(self, [stateName]);
+        } else {
+          return value;
+        }
+      }.addSelf();
+    */
+      
+  ```
+
+- 清楚某个状态  
+  `state.clear` *用法同state.isGood*
+  
+- 子集  
+  当我们只想检查某些状态时，可以使用`state.child` 或者 'state.antiChild`
+  
