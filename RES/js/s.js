@@ -65,7 +65,7 @@ s.prototype.isGood = function (self, args) {
 
 s.prototype.child = function (self, states) {
 	var child = new s();
-	var unbindTurple = ["clear", "set", "get", "add", "child"];
+	var unbindTurple = ["clear", "set", "get", "add", "child", "antiChild"];
 	unbindTurple.forEach(function (pn) {
 		child[pn] = null;
 	});
@@ -82,6 +82,21 @@ s.prototype.antiChild = function (self, states) {
 	}
 	return child;
 }.addSelf().withArrayLikeArguments();
+
+s.when = function(states) {
+	var st = new s().child();
+	st.isGood = function() {
+		var isGood = true;
+		for (var i = states.length; i--;) {
+			if (!states[i].isGood()) {
+				isGood = false;
+				break;
+			}
+		}
+		return isGood;
+	}
+	return st;
+}.withArrayLikeArguments();
 
 /*
 	test s:
