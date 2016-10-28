@@ -1,6 +1,6 @@
 # Directory
 - [fn.js](#fnjs)
-- [Activity.js](#Activityjs)
+- [Activity.js](#activityjs)
 
 ---
 
@@ -132,15 +132,16 @@
 ---
 
 ##[Activity.js](./Activity.js)  
-  *require jQuery, fn.js*
-  ```js
-    /*
+
+- 依赖库
+  ***require jQuery, fn.js***
+  
+- 说明
+
       一个活动，可划分成
-        准备 -> 执行 -> 收尾
+      准备 -> 执行 -> 收尾
       在任何阶段，我们都可以为其添加活动
-      活动是有优先级的，相同优先级的活动顺序执行。
-    */
-  ```
+      活动是有优先级的，相同优先级的活动将顺序执行。
   
 - 创建一个Activity
   ```js
