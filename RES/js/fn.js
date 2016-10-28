@@ -46,6 +46,15 @@
 			return apply.call(this, func, args, undefined);
 		}
 	}
+	
+	fp.forAllArguments = function() {
+		return function(func, args) {
+			var ctx = this;
+			args.forEach(function(value) {
+				apply.call(ctx, func, [value]);
+			})
+		}.withArrayLikeArguments(this);
+	}
 
 	var _throttle = function (fn, opt) {
 		var isIdle = true, toBeIdle = null, next = null, lastExecTime = null;
