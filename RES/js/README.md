@@ -281,12 +281,12 @@
   
     // 创建一个空状态集
     var states = new s();
-    // 创建一个状态集 -- 基于已有状态集
+    // 创建一个状态集, 该状态集基于已有状态集
     var states = new s({
       allowClick: false,
       allowMove: false,
       loading: false
-    })
+    });
     
   ```
 
