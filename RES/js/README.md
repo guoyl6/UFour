@@ -1,5 +1,6 @@
 # Directory
 - [fn.js](#fnjs)
+- [Activity.js](#Activityjs)
 
 ---
 
@@ -128,3 +129,32 @@
 *返回一个函数，该函数将根据参数决定如何对func进行频率控制*  
   ![throttle](./throttle.png)
 
+---
+
+##[Activity.js](./Activity.js)  
+  *require jQuery, fn.js*
+  ```js
+    /*
+      一个活动，可划分成
+        准备 -> 执行 -> 收尾
+      在任何阶段，我们都可以为其添加活动
+      活动是有优先级的，相同优先级的活动顺序执行。
+    */
+  ```
+  
+- 创建一个Activity
+  ```js
+    var activity = new Activity();
+  ```
+  
+- 为某个activity添加操作
+  ```js
+    activity.before.add(func | Activity, priority);
+    activity.todo.add(func | Activity, priority);
+    activity.after.add(func | Activity, priority);
+  ```
+  
+- 执行activity
+  ```js
+    activity.exec()
+  ```
