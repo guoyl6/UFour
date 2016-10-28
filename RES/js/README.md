@@ -174,7 +174,14 @@
       }).add(function() {
         console.log("在deferred.resolve之前该函数不会执行");
       })
+      activity.exec();
       setTimeout(deferred.resolve.bind(deferred), 3000);
+      
+      /*
+        3秒后
+        -> "在deferred.resolve之前该函数不会执行"
+      */
+      
     ```
   + 若我们想在Activity间传递数据，可参考下面代码  
   
@@ -187,4 +194,26 @@
         console.log(data);
       });
       ac1.exec();
+      
+      /*
+        -> {message: "hello ac2"}
+      */
     ```
+  + 优先级详解  
+  
+  ```js
+    var activity = new Activity();
+    activity.todo.add(function() {
+      console.log("低优先级")
+    }).add(function() {
+      console.log("高优先级");
+    }, 1);
+    /*优先级默认为0*/
+    activity.exec();
+    
+    /*
+      -> "高优先级"
+      -> "低优先级"
+    */
+    
+  ```
