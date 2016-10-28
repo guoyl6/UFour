@@ -119,7 +119,7 @@
       -> 2: 3
     */
   ```  
-  
+
   *应用场景*  
   
   ```js
@@ -153,12 +153,13 @@
       活动是有优先级的，相同优先级的活动将顺序执行。
     */
   ```
+
 - 创建一个Activity  
 
   ```js
     var activity = new Activity();
   ```
-  
+
 - 为某个activity添加操作  
 
   ```js
@@ -171,7 +172,7 @@
     activity.after.add(func | Activity | object({exec: function}),
                  priority);
   ```
-  
+
 - 执行activity  
 
   ```js
@@ -199,6 +200,7 @@
       */
       
     ```
+
   + 若我们想在Activity间传递数据，可参考下面代码  
   
     ```js
@@ -216,7 +218,7 @@
       */
       
     ```
-    
+
   + 优先级详解  
   
     ```js
@@ -250,7 +252,7 @@
       一个系统往往有很多种状态，而有时候，当且仅当在某些状态下才能进行相应的操作
     */
   ```
-  
+
 - 创建一个状态集  
 
   ```js
@@ -305,8 +307,8 @@
   `state.clear` *用法同state.isGood*
   
 - 子集  
-  当我们只想检查部分状态时，可以用`states.child` 或者 `states.antiChild`
-  
+  当我们只想检查部分状态时，可以用`states.child` 或者 `states.antiChild`  
+
   + states.child  
     返回一个s对象，该对象只提供isGood方法，相应对象全为真时返回真  
     
@@ -326,7 +328,7 @@
       // 检查部分状态
       states.antiChild("loading", "allowClick");
     ```
-  
+
   + 基于多个子集的情况 's.when'，静态方法  
     返回一个s对象，该对象只提供isGood方法，所传子集全为真时返回真  
     
