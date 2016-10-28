@@ -161,7 +161,7 @@
       准备 -> 执行 -> 收尾
       在任何阶段，我们都可以为其添加活动
       活动是有优先级的，相同优先级的活动将顺序执行。
-    */
+    */
     
   ```
 
@@ -270,18 +270,18 @@
   ```js
   
     /*
-      一个系统往往有很多种状态，而有时候，当且仅当在某些状态下才能进行相应的操作
-    */
+      一个系统往往有很多种状态，而有时候，当且仅当在某些状态下才能进行相应的操作
+    */
     
   ```
 
 - 创建一个状态集  
 
-  ```js
+  ```js
   
     // 创建一个空状态集
     var states = new s();
-    // 创建一个状态集, 该状态集基于已有状态集
+    // 创建一个状态集, 该状态集基于已有状态集
     var states = new s({
       allowClick: false,
       allowMove: false,
@@ -292,12 +292,12 @@
 
 - 检查状态集是否是良好态  
 
-  ```js
+  ```js
   
     // 检查全部状态
     states.isGood();
-    // 检查部分状态
-    states.isGood("allowClick", "allowMove");
+    // 检查部分状态
+    states.isGood("allowClick", "allowMove");
     
   ```
 
@@ -307,7 +307,7 @@
   
     states.set(stateName, value)
     /*
-      这里当value是function时，我们在获得其情况时将会进行如下操作：
+      这里当value是function时，我们在获得其情况时将会进行如下操作：
         return value.apply(self, [stateName])
     */
      states.add 等同于 states.set
@@ -316,10 +316,10 @@
 
 - 获得某个状态的情况  
 
-  ```js
+  ```js
   
     states.get("allowClick");
-    /*
+    /*
       s.prototype.get = function (self, stateName) {
         var value = self.state[stateName];
         if (typeof value === "function") {
@@ -336,16 +336,16 @@
   `state.clear` *用法同state.isGood*
   
 - 子集  
-  当我们只想检查部分状态时，可以用`states.child` 或者 `states.antiChild`  
+  当我们只想检查部分状态时，可以用`states.child` 或者 `states.antiChild`  
 
-  + states.child  
-    返回一个s对象，该对象只提供isGood方法，相应对象全为真时返回真  
+  + states.child  
+    返回一个s对象，该对象只提供isGood方法，相应对象全为真时返回真  
     
     ```js
     
       // 检查全部状态
       states.child()
-      // 检查部分状态
+      // 检查部分状态
       states.child("loading", "allowClick");
       
     ```
@@ -357,12 +357,12 @@
      
       // 检查全部状态
       states.antiChild()
-      // 检查部分状态
+      // 检查部分状态
       states.antiChild("loading", "allowClick");
       
     ```
 
-  + 基于多个子集的情况 's.when'，静态方法  
+  + 基于多个子集的情况 's.when'，静态方法  
     返回一个s对象，该对象只提供isGood方法，所传子集全为真时返回真  
     
     ```js
@@ -370,18 +370,18 @@
       var child1 = states.child("loading"), child2 = states.antiChild("allowClick");
       var child3 = s.when(child1, child2);
       /*
-        当child1为真、child2也为真，即"loading"态为真、"allowClick"态为假时，
-        child3.isGood() 为真。
+        当child1为真、child2也为真，即"loading"态为真、"allowClick"态为假时，
+        child3.isGood() 为真。
       */
       
     ```
 
 - bs  
-  一个简单的执行器  
+  一个简单的执行器  
   
   ```js
   
-    var t = new bs(fn1 | bs, fn2 | bs...);
+    var t = new bs(fn1 | bs, fn2 | bs...);
     /*
       var bs = function (self, fns) {
         self.calls = [];
@@ -392,8 +392,8 @@
     t.care(child3, child4...);
     t.addExec(fn3, fn4...);
     t.exec(data1, data2...);
-    /*
-      若t关心的状态全为真，则顺序执行其绑定的函数
+    /*
+      若t关心的状态全为真，则顺序执行其绑定的函数
     */
     
   ```
