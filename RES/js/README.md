@@ -133,29 +133,54 @@
 
 ##[Activity.js](./Activity.js)  
 
-- 依赖库
+- 依赖库  
   ***require jQuery, fn.js***
   
-- 说明
-
-      一个活动，可划分成
-      准备 -> 执行 -> 收尾
-      在任何阶段，我们都可以为其添加活动
-      活动是有优先级的，相同优先级的活动将顺序执行。
-  
-- 创建一个Activity
+- 说明  
+  ```js
+    /*
+    一个活动，可划分成
+    准备 -> 执行 -> 收尾
+    在任何阶段，我们都可以为其添加活动
+    活动是有优先级的，相同优先级的活动将顺序执行。
+    */
+  ```
+- 创建一个Activity  
   ```js
     var activity = new Activity();
   ```
   
-- 为某个activity添加操作
+- 为某个activity添加操作  
   ```js
     activity.before.add(func | Activity, priority);
     activity.todo.add(func | Activity, priority);
     activity.after.add(func | Activity, priority);
   ```
   
-- 执行activity
+- 执行activity  
   ```js
     activity.exec()
+  ```
+
+- 高级功能
+- 若我们想接管activity，只需返回一个Promise，([jQuery.Deferred 相关教程](http://api.jquery.com/category/deferred-object/))  
+  ```js
+    var deferred = jQuery.Deferred(), activity = new Activity();
+    activity.todo.add(function() {
+      return deferred.promise();
+    }).add(function() {
+      console.log("在deferred.resolve之前该函数不会执行");
+    })
+    setTimeout(deferred.resolve.bind(deferred), 3000);
+  ```
+- 若我们想在Activity间传递数据，可参考下面代码  
+  ```js
+    var ac1 = new Activity(), ac2 = new Activity();
+    ac1.todo.add(function(data) {
+      data.message = "hello ac2";
+    }).add(ac2);
+    ac2.todo.add(function(data) {
+      console.log(data);
+    });
+    ac1.exec();
   ```
