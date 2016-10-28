@@ -30,6 +30,21 @@
 		return typeof obj === "function" ? obj : obj.exec.bind(obj);
 	}
 
+	var _exec = function(self, args) {
+		if (args.length === 0) {
+			// 用于在不同_activity间交换数据
+			args.push({});
+
+		}
+
+		var calls = self.getCalls(args);
+
+		var obj = _getDeferred(calls), deferred = obj.executor;
+		setTimeout(deferred.resolve.bind(deferred));
+		return obj.promise;
+
+	}.addSelf().withArrayLikeArguments();
+
 	function _activity() {
 		this.toCall = {};
 	}
@@ -44,22 +59,23 @@
 		return this;
 	}
 
-	_activity.prototype.exec = function(self, args) {
+	_activity.prototype.getCalls = function(self, args) {
 		var priorities = Object.keys(self.toCall), calls = [];
+
 		priorities.sort(function(a, b) {
-			return +a - +b;
+			return +b - +a;
 		});
+
 		priorities.forEach(function(priority) {
 			calls = calls.concat(self.toCall[priority].map(function(obj) {
 				return _realCall(obj).delay(args);
 			}));
 		})
 
-		var obj = _getDeferred(calls), deferred = obj.executor;
-		setTimeout(deferred.resolve.bind(deferred));
-		return obj.promise;
-
-	}.addSelf().withArrayLikeArguments();
+		return calls;
+	}.addSelf();
+	
+	_activity.prototype.exec = _exec;
 
 	Activity = function() {
 		this.before = new _activity();
@@ -67,17 +83,17 @@
 		this.after = new _activity();
 	};
 
-	Activity.prototype.exec = function(self, args) {
+	Activity.prototype.getCalls = function(self, args) {
 		var calls = [], tuple = ["before", "todo", "after"];
-		if (args.length === 0) {
-			// 用于在不同_activity间交换数据
-			args.push({});
-
-		}
+		
 		tuple.forEach(function(step) {
 			var activity = self[step];
 			calls.push(activity.exec.delay(args, activity));
 		})
-	}.addSelf().withArrayLikeArguments();
+
+		return calls;
+	}.addSelf();
+
+	Activity.prototype.exec = _exec;
 
 })(jQuery);
