@@ -166,6 +166,7 @@
 
   + 若我们想接管activity，只需返回一个Promise  
     ([jQuery.Deferred 相关教程](http://api.jquery.com/category/deferred-object/))  
+    
     ```js
       var deferred = jQuery.Deferred(), activity = new Activity();
       activity.todo.add(function() {
@@ -176,6 +177,7 @@
       setTimeout(deferred.resolve.bind(deferred), 3000);
     ```
   + 若我们想在Activity间传递数据，可参考下面代码  
+  
     ```js
       var ac1 = new Activity(), ac2 = new Activity();
       ac1.todo.add(function(data) {
