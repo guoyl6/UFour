@@ -254,7 +254,26 @@
       ac1.exec();
       
       /*
-        -> { message: "hello ac2" }
+        -> { self: ac1, message: "hello ac2" }
+      */
+      
+      /*
+        观察以下代码
+        if (args.length === 0 || (typeof args[0] !== "object") ) {
+            // 用于在不同_activity间交换数据
+            args.unshift({
+                self: self
+            });
+
+        }
+        
+        if (!("self" in args[0])) {
+            args[0].self = self;
+        }
+        由上可知当activity.exec时若无参数或者第一个参数不是对象，则会自动加入一个对象。
+        如此保证了添加的函数的第一个参数是对象，且该对象含有self属性。
+        在上面的例子中，如果我们ac1.exec()，则 obj.self === ac1;
+        如果我们ac1.todo.exec(), 则 obj.self === ac1.todo
       */
       
     ```
