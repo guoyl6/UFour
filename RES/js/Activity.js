@@ -23,7 +23,7 @@
 	}
 
 	var _isAcceptType = function(obj) {
-		return obj && (obj instanceof _activity || obj instanceof Activity || typeof obj === "function" || typeof obj.exec === "function");
+		return obj && (obj instanceof _activity || typeof obj === "function" || typeof obj.exec === "function");
 	}
 
 	var _realCall = function(obj) {
@@ -52,7 +52,7 @@
 	_activity.prototype.add = function(activity, priority) {
 		priority = priority || 0;
 		var key = priority.toString();
-		if (_isAcceptType(activity)) {
+		if (_isAcceptType(activity) && activity != this) {
 			this.toCall[key] = this.toCall[key] || [];
 			this.toCall[key].push(activity);
 		}
@@ -78,15 +78,15 @@
 	_activity.prototype.exec = _exec;
 
 	Activity = function() {
+		
 		this.before = new _activity();
 		this.todo = new _activity();
 		this.after = new _activity();
+
+		this.toCall = this.todo.toCall;
 	};
-	
-	Activity.prototype.add = function(activity, priority) {
-		this.todo.add(activity, priority);
-		return this;
-	}
+
+	Activity.prototype = new _activity();
 
 	Activity.prototype.getCalls = function(self, args) {
 		var calls = [], tuple = ["before", "todo", "after"];
@@ -99,6 +99,5 @@
 		return calls;
 	}.addSelf();
 
-	Activity.prototype.exec = _exec;
 
 })(jQuery);
