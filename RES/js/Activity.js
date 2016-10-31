@@ -31,10 +31,16 @@
     }
 
     var _exec = function(self, args) {
-        if (args.length === 0) {
+        if (args.length === 0 || (typeof args[0] !== "object") ) {
             // 用于在不同_activity间交换数据
-            args.push({});
+            args.push({
+                self: self
+            });
 
+        }
+        
+        if (!("self" in args[0])) {
+            args[0].self = self;
         }
 
         var calls = self.getCalls(args);
@@ -74,7 +80,7 @@
 
         return calls;
     }.addSelf();
-    
+
     _activity.prototype.exec = _exec;
 
     Activity = function() {
