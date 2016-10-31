@@ -33,7 +33,7 @@
     var _exec = function(self, args) {
         if (args.length === 0 || (typeof args[0] !== "object") ) {
             // 用于在不同_activity间交换数据
-            args.push({
+            args.unshift({
                 self: self
             });
 
