@@ -201,10 +201,10 @@
     activity.after.add(func | Activity | object({exec: function}),
                  priority);
     /*
-      activity.add 与 activity.todo.add 效果相同，不同之处在于：
-      activity.add(...) === activity // true
-      activity.todo.add(...) === activity // false
-      activity.todo.add(...) === activity.todo // true
+      activity.add 与 activity.todo.add 效果相同，不同之处在于：
+        activity.add(...) === activity // true
+        activity.todo.add(...) === activity // false
+        activity.todo.add(...) === activity.todo // true
     */
                  
   ```
