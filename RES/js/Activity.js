@@ -38,7 +38,7 @@
             });
 
         }
-        
+
         if (!("self" in args[0])) {
             args[0].self = self;
         }
@@ -53,16 +53,23 @@
 
     function _activity() {
         this.toCall = {};
+        this.defaultPriority = 0;
     }
 
     _activity.prototype.add = function(activity, priority) {
-        priority = priority || 0;
+        priority = arguments.length > 1 ? priority : this.defaultPriority;
         var key = priority.toString();
         if (_isAcceptType(activity) && activity != this) {
             this.toCall[key] = this.toCall[key] || [];
             this.toCall[key].push(activity);
         }
         return this;
+    }
+
+    _activity.prototype.callCreator = function(args) {
+        return function(obj) {
+            return _realCall(obj).delay(args);
+        }
     }
 
     _activity.prototype.getCalls = function(self, args) {
@@ -73,9 +80,7 @@
         });
 
         priorities.forEach(function(priority) {
-            calls = calls.concat(self.toCall[priority].map(function(obj) {
-                return _realCall(obj).delay(args);
-            }));
+            calls = calls.concat(self.toCall[priority].map(self.callCreator(args)));
         })
 
         return calls;
@@ -94,13 +99,20 @@
 
     Activity.prototype = new _activity();
 
+    Activity.prototype.execTuple = ["before", "todo", "after"];
+
+    Activity.prototype.callCreator = function(args) {
+        return function(obj) {
+            return obj.exec.delay(args, obj);
+        }
+    }
+
     Activity.prototype.getCalls = function(self, args) {
-        var calls = [], tuple = ["before", "todo", "after"];
+        var calls = null, tuple = self.execTuple;
         
-        tuple.forEach(function(step) {
-            var activity = self[step];
-            calls.push(activity.exec.delay(args, activity));
-        })
+        calls = tuple.map(function(step) {
+            return self[step];
+        }).map(self.callCreator(args));
 
         return calls;
     }.addSelf();
