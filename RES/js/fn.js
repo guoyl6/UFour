@@ -4,7 +4,6 @@
     var slice = Array.prototype.slice;
     var fp = Function.prototype;
     var apply = function (func, args, ctx) {
-        // console.log(func, args, ctx);
         return func.apply(getContext(this, ctx), args);
     }
 
@@ -57,7 +56,6 @@
     }
 
     var _throttle = function (fn, opt) {
-        console.log(fn);
         var isIdle = true, toBeIdle = null, next = null, lastExecTime = null,
             immediately = opt.immediately, delay = opt.delay || 0,
             debounce = opt.debounce || false, tail = opt.tail || false,
@@ -69,7 +67,6 @@
                     diff = diff < 0 ? -diff : 0;
                 }
                 if (tail || !diff) {
-                    // console.log(diff);
                     next = setTimeout(function () {
                         exec.apply(this, args);
                         next = null;
@@ -94,11 +91,9 @@
                     toBeIdle = null;
                 }, delay);
             };
-		
         if (!("immediately" in opt)) {
             opt.immediately = true;
         }
-		
         return function () {
             if (lastExecTime === null) {
                 lastExecTime = Date.now();
@@ -137,7 +132,6 @@
 
 
     fp.throttle = function (delay, immediately, tail) {
-        console.log(this);
         return _throttle(this, {
             delay: delay,
             immediately: immediately,
