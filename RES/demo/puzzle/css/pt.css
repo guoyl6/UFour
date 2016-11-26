@@ -22,6 +22,7 @@ body {
 }
 
 .size1:after {
+	background-size: 400px 400px;
 	background-image: url(../image/www.lingyu.me_2016081812504084.jpg);
 }
 
