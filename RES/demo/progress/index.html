@@ -22,7 +22,7 @@
 			_progress.getProgressHref = function(a) {
 				a = a || window.location;
 				var search = new URLSearchParams(window.location.search);
-				search.set('urlPath', a.pathname + searchString + a.hash);
+				search.set('urlPath', a.pathname + a.search + a.hash);
 				var searchString = search.toString();
 				searchString = searchString.length ? '?' + searchString : '';
 				return la.origin + la.pathname + searchString + window.location.hash;
@@ -111,10 +111,10 @@
 	<div id="progressBar">
 		<div id="progress"></div>
 	</div>
-	<nav id="demos">
+	<nav id="demos" title="More">
 		<a href="main.html">首页</a>
-		<a href="../puzzle/pt.html">puzzle</a>
-		<a href="../move/move.html">move</a>
+		<a href="../puzzle/pt.html">Puzzle</a>
+		<a href="../move/move.html">Move</a>
 	</nav>
 </body>
 </html>
