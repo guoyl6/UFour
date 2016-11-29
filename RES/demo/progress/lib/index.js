@@ -188,6 +188,9 @@ window.addEventListener('load', function() {
 /*some function*/
 
 function render(urlpath) {
+  if (!urlpath) {
+    return;
+  }
   if (parent.window != window && parent.window._progress) {
     return parent.window._progress.jumpTo(urlpath);
   };
