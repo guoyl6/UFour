@@ -22,7 +22,7 @@
 			_progress.getProgressHref = function(a) {
 				a = a || window.location;
 				var search = new URLSearchParams(window.location.search);
-				search.set('urlPath', a.pathname + searchString + a.location.hash);
+				search.set('urlPath', a.pathname + searchString + a.hash);
 				var searchString = search.toString();
 				searchString = searchString.length ? '?' + searchString : '';
 				return la.origin + la.pathname + searchString + window.location.hash;
