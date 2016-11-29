@@ -43,7 +43,7 @@ window.addEventListener('load', function() {
     },
 
     show: function() {
-      progressBar.style.display = "";
+      progressBar.style.display = "block";
     },
 
     domLoading: function() {
