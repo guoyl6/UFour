@@ -6,12 +6,14 @@
 	<link rel="stylesheet" href="lib/index.css">
 	<script type='text/javascript' src='lib/index.js'></script>
 	<script>
+		
+		function getUrl(defaultValue) {
+			var t = new URLSearchParams(window.location.search);
+			return t.get('urlPath') || defaultValue;
+		}
+		
 		window.addEventListener('load', function() {
-			function getUrl(defaultValue) {
-				var t = new URLSearchParams(window.location.search);
-				return t.get('urlPath') || defaultValue;
-			}
-
+			
 			_progress.getProgressHref = function(a) {
 				var search = new URLSearchParams(a.search);
 				search.set('urlPath', a.href);
@@ -31,9 +33,11 @@
 				return false;
 			};
 
-			render(getUrl('main.html'));
+			
 
 		})
+		
+		render(getUrl('main.html'));
 	</script>
 	<style>
 		a:link,
