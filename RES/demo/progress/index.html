@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="lib/index.css">
 	<script type='text/script' src='lib/index.js'></script>
 	<script>
-		window.addEventlistener('load', function() {
+		window.addEventListener('load', function() {
 			function getUrl(defaultValue) {
 				var t = new URLSearchParams(window.location.search);
 				return t.get('urlPath') || defaultValue;
@@ -23,13 +23,13 @@
 			_progress.title = '加载中...';
 
 			var demos = document.getElementById('demos');
-			demos.onclick(function(e) {
+			demos.onclick = function(e) {
 				e.defaultPrevented = true;
 				if (/a|A/.test(e.target.tagName)) {
 					_progress.jumpTo(e.target.href);
 				}
 				return false;
-			})
+			};
 
 			render(getUrl('main.html'));
 
