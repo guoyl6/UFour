@@ -43,7 +43,7 @@
 			color: #428bca;
 		}
 
-		#demos, #demos:before {
+		#demos, #demos:after {
 			display: block;
 			position: fixed;
 			top: 0;
@@ -52,7 +52,6 @@
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
-			background-color: white;
 		}
 
 		#demos {
@@ -71,11 +70,15 @@
 			margin: 0 10px;
 		}
 
-		#demos:before {
+		#demos:after {
 			content: "Demos";
 			z-index: 1;
 			opacity: .5;
 			color: #ddd;
+			-webkit-transform: translateY(100%);
+			-ms-transform: translateY(100%);
+			-o-transform: translateY(100%);
+			transform: translateY(100%);
 		}
 
 		#demos:hover {
@@ -85,7 +88,7 @@
 			transform: translateY(0);
 		}
 
-		#demos:hover:before {
+		#demos:hover:after {
 			opacity: 1;
 		}
 	</style>
