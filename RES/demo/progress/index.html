@@ -13,15 +13,16 @@
 		}
 		
 		window.addEventListener('load', function() {
-			
+			var location = document.createElement("a");
+			a.href = window.location.toString();
 			_progress.getProgressHref = function(a) {
 				var search = new URLSearchParams(window.location.search);
 				search.set('urlPath', a.href);
 				var searchString = search.toString();
 				searchString = searchString.length ? '?' + searchString : '';
-				return window.location.origin + window.location.pathname + searchString + window.location.hash;
+				return location.origin + location.pathname + searchString + location.hash;
 			}
-
+			
 			_progress.title = '加载中...';
 
 			var demos = document.getElementById('demos');
