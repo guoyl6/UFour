@@ -15,11 +15,11 @@
 		window.addEventListener('load', function() {
 			
 			_progress.getProgressHref = function(a) {
-				var search = new URLSearchParams(a.search);
+				var search = new URLSearchParams(window.location.search);
 				search.set('urlPath', a.href);
 				var searchString = search.toString();
 				searchString = searchString.length ? '?' + searchString : '';
-				return a.origin + a.pathname + searchString + a.hash;
+				return window.location.origin + window.location.pathname + searchString + window.location.hash;
 			}
 
 			_progress.title = '加载中...';
