@@ -150,9 +150,9 @@ window.addEventListener('load', function() {
     }
   };
 
-  var startLoaded = function() {
+  startLoaded = function(a) {
 
-    main.src = _progress.getRealHref();
+    main.src = _progress.getRealHref(a);
     main.frameBorder = 0;
     main.id = "main";
     // var t = main.contentWindow;
@@ -172,10 +172,6 @@ window.addEventListener('load', function() {
 
   }
 
-
-
-  startLoaded();
-
   window.addEventListener('hashchange', function(e) {
     if (main.contentWindow.location.hash == window.location.hash) {
       main.contentWindow.location.href = main.contentWindow.location.href;
@@ -186,3 +182,20 @@ window.addEventListener('load', function() {
   })
 
 })
+
+/*some function*/
+
+function render(urlpath) {
+  if (parent.window._progress) {
+    return parent.window._progress.jumpTo(urlpath);
+  };
+  window.addEventListener('load', function() {
+    var a = document.createElement('a');
+    a.href = urlpath;
+    if (a.origin != window.origin) {
+        alert('origin not equal: ' + a.origin + ' , require: ' + window.origin);
+    } else {
+        startLoaded(a);
+    }
+  });
+}
