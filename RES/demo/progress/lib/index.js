@@ -150,7 +150,7 @@ window.addEventListener('load', function() {
     }
   };
 
-  startLoaded = function(a) {
+  startLoad = function(a) {
 
     main.src = _progress.getRealHref(a);
     main.frameBorder = 0;
@@ -195,7 +195,7 @@ function render(urlpath) {
     if (a.origin != window.location.origin) {
         alert('origin not equal: ' + a.origin + ' , require: ' + window.location.origin);
     } else {
-        startLoaded(a);
+        startLoad(a);
     }
   });
 }
