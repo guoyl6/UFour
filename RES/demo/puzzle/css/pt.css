@@ -21,7 +21,7 @@ body {
 .size1 {
 	width: 400px;
 	height: 400px;
-	margin-left: 200px;
+	left: -200px;
 }
 
 .size1:after {
