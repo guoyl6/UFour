@@ -192,8 +192,8 @@ function render(urlpath) {
   window.addEventListener('load', function() {
     var a = document.createElement('a');
     a.href = urlpath;
-    if (a.origin != window.origin) {
-        alert('origin not equal: ' + a.origin + ' , require: ' + window.origin);
+    if (a.origin != window.location.origin) {
+        alert('origin not equal: ' + a.origin + ' , require: ' + window.location.origin);
     } else {
         startLoaded(a);
     }
