@@ -35,7 +35,6 @@
 				e.defaultPrevented = true;
 				if (e.target.tagName.toUpperCase() === "A") {
 					_progress.jumpTo(e.target.href);
-					demos.title = e.target.textContent;
 				}
 				return false;
 			};
