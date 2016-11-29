@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8"/>
+	<title>index</title>
+	<link rel="stylesheet" href="lib/index.css">
+	<script type='text/script' src='lib/index.js'></script>
+	<script>
+		window.addEventlistener('load', function() {
+			function getUrl(defaultValue) {
+				var t = new URLSearchParams(window.location.search);
+				return t.get('urlPath') || defaultValue;
+			}
+
+			_progress.getProgressHref = function(a) {
+				var search = new URLSearchParams(a.search);
+				search.set('urlPath', a.href);
+				var searchString = search.toString();
+				searchString = searchString.length ? '?' + searchString : '';
+				return a.origin + a.pathname + searchString + a.hash;
+			}
+
+			_progress.title = '加载中...';
+
+			var demos = document.getElementById('demos');
+			demos.onclick(function(e) {
+				e.defaultPrevented = true;
+				if (/a|A/.test(e.target.tagName)) {
+					_progress.jumpTo(e.target.href);
+				}
+				return false;
+			})
+
+			render(getUrl('main.html'));
+
+		})
+	</script>
+	<style>
+		a:link,
+		a:visited,
+		a:hover,
+		a:focus {
+			color: #428bca;
+		}
+
+		#demos, #demos:before {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			padding: 5px;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			background-color: white;
+		}
+
+		#demos {
+			z-index: 2;
+			width: 100%;
+			-webkit-transform: translateY(-100%);
+			-ms-transform: translateY(-100%);
+			-o-transform: translateY(-100%);
+			transform: translateY(-100%);
+			-webkit-transition: transform .5s;
+			-o-transition: transform .5s;
+			transition: transform .5s;
+		}
+
+		#demos a {
+			margin: 0 10px;
+		}
+
+		#demos:before {
+			content: "Demos";
+			z-index: 1;
+			opacity: .5;
+			color: #ddd;
+		}
+
+		#demos:hover {
+			-webkit-transform: translateY(0);
+			-ms-transform: translateY(0);
+			-o-transform: translateY(0);
+			transform: translateY(0);
+		}
+
+		#demos:hover:before {
+			opacity: 1;
+		}
+	</style>
+</head>
+<body>
+	<div id="progressBar">
+		<div id="progress"></div>
+	</div>
+	<nav id="demos">
+		<a href="main.html">首页</a>
+		<a href="../puzzle/pt.html">puzzle</a>
+		<a href="../move/move.html">move</a>
+	</nav>
+</body>
+</html>
