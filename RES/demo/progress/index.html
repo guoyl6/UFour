@@ -35,6 +35,7 @@
 				e.defaultPrevented = true;
 				if (e.target.tagName.toUpperCase() === "A") {
 					_progress.jumpTo(e.target.href);
+					demos.title = e.target.textContent;
 				}
 				return false;
 			};
@@ -82,7 +83,7 @@
 		}
 
 		#demos:after {
-			content: "Demos";
+			content: attr(title);
 			z-index: 1;
 			opacity: .5;
 			color: #333;
