@@ -6,6 +6,7 @@
 }
 
 #progressBar {
+  display: none;
   position: fixed;
   background-color: #ddd;
   z-index: 9999;
