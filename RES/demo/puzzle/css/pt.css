@@ -55,3 +55,14 @@ body {
 	border: none;
 	background-image: none;
 }
+
+nav {
+	margin: 10px;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:focus {
+	color: #428bca;
+}
