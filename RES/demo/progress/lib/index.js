@@ -18,6 +18,7 @@ window.addEventListener('load', function() {
     now: 0,
     next: .4,
     growing: null,
+    title: document.title,
 
     loading: function(value, callback) {
       _progress.next = value;
@@ -144,6 +145,7 @@ window.addEventListener('load', function() {
     init: function() {
       _progress.now = 0;
       _progress.next = _progress.domLoaded;
+      document.title = _progress.title;
       _progress.show();
       _progress.update();
       _progress.domLoading();
