@@ -15,9 +15,14 @@
 		window.addEventListener('load', function() {
 			var la = document.createElement("a");
 			la.href = window.location.toString();
+			_progress.getRealHref = function(a) {
+				a = a || window.location;
+				return a.href;
+			}
 			_progress.getProgressHref = function(a) {
+				a = a || window.location;
 				var search = new URLSearchParams(window.location.search);
-				search.set('urlPath', a.href);
+				search.set('urlPath', a.pathname + searchString + a.location.hash);
 				var searchString = search.toString();
 				searchString = searchString.length ? '?' + searchString : '';
 				return la.origin + la.pathname + searchString + window.location.hash;
