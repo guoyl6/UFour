@@ -6,9 +6,12 @@ window.addEventListener('load', function() {
   var bs = 'noprogress=true';
 
   var progressBar = document.getElementById("progressBar"),
-    progress = document.getElementById("progress");
+    progress = document.getElementById("progress"),
+    body = document.getElementsByTagName("body")[0];
 
-  var main = document.createElement("iframe");
+  var main = document.getElementById("main") || document.createElement("iframe");
+  main.frameBorder = 0;
+  main.id = "main";
 
   _progress = {
 
@@ -155,8 +158,7 @@ window.addEventListener('load', function() {
   startLoad = function(a) {
 
     main.src = _progress.getRealHref(a);
-    main.frameBorder = 0;
-    main.id = "main";
+    
     // var t = main.contentWindow;
     // console.log(main.contentWindow);
     // -> null
@@ -168,7 +170,7 @@ window.addEventListener('load', function() {
       // -> false
     }
 
-    document.body.appendChild(main);
+    body.appendChild(main);
 
     _progress.init();
 
