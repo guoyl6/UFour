@@ -12,6 +12,7 @@ window.addEventListener('load', function() {
   var main = document.getElementById("main") || document.createElement("iframe");
   main.frameBorder = 0;
   main.id = "main";
+  body.appendChild(main);
 
   _progress = {
 
@@ -169,8 +170,6 @@ window.addEventListener('load', function() {
       // console.log(t === main.contentWindow);
       // -> false
     }
-
-    body.appendChild(main);
 
     _progress.init();
 
