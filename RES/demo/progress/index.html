@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>index</title>
+	<base href="" id='base'/>
 	<link rel="stylesheet" href="lib/index.css">
 	<script type='text/javascript' src='lib/index.js'></script>
 	<script>
@@ -15,6 +16,7 @@
 		window.addEventListener('load', function() {
 			var la = document.createElement("a");
 			la.href = window.location.toString();
+			document.getElementById('base').href = la.href;
 			_progress.getRealHref = function(a) {
 				a = a || window.location;
 				return a.href;
