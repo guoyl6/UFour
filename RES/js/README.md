@@ -462,24 +462,23 @@
 
  ```
   
-- this.dict - {}  
-  储存key为非object时的(key, value)对
+- this.dict  
+  '{}'  
+  储存key为非object时的(key, value)对
   
-- this.object_dict -[]  
+- this.object_dict
+  '[]'  
   储存key为object时的(key, value)对
   
 - pair  
-  当储存key为object时的(key, value)对时，将 `new this.pair(key, value)` 储存于this.object_dict
-  
+  当储存key为object时的(key, value)对时，将 `new this.pair(key, value)` 储存于'this.object_dict'  
+
   + this.key  
     储存key值  
-
   + this.value  
     储存value值  
-
-  + getKey  
+  + getKey  
     获得key值  
-
   + getValue  
     获得value值  
 
