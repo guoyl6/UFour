@@ -3,7 +3,7 @@
 		var t = {}, a = [], b = [];
 		t[a] = 'this is value of a';
 		t[b] == t[a] -> true
-		因为t在得到对象的key值时都会变成[object object]，
+		因为t在得到对象的key值时都会变成[object Object]，
 		所以没办法区分 t[a] 和 t[b] 的区别
 
 	var t = new dict(), a = [], b = [];
