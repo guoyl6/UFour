@@ -201,7 +201,7 @@
                  priority);
     activity.after.add(func | Activity | object({exec: function}),
                  priority);
-    /*
+    /*
       activity.add 与 activity.todo.add 效果相同，不同之处在于：
         activity.add(...) === activity // true
         activity.todo.add(...) === activity // false
@@ -271,10 +271,10 @@
         if (!("self" in args[0])) {
             args[0].self = self;
         }
-        由上可知当activity.exec时若无参数或者第一个参数不是对象，则会自动加入一个对象。
-        如此保证了添加的函数的第一个参数是对象，且该对象含有self属性。
-        在上面的例子中，如果我们ac1.exec()，则 obj.self === ac1;
-        如果我们ac1.todo.exec(), 则 obj.self === ac1.todo
+        由上可知当activity.exec时若无参数或者第一个参数不是对象，则会自动加入一个对象。
+        如此保证了添加的函数的第一个参数是对象，且该对象含有self属性。
+        在上面的例子中，如果我们ac1.exec()，则 obj.self === ac1;
+        如果我们ac1.todo.exec(), 则 obj.self === ac1.todo
       */
       
     ```
@@ -440,30 +440,30 @@
   ```
   
 ##[dict.js](./dict.js)  
-  代码比较简单，详细请见js文档  
+  代码比较简单，详细请见js文档  
 
- ```js
+```js
 
-   // 分析以下情况
-   var obj = {}, a = ['a'], b = ['b'];
-   obj[a] = 'the value of a';
-   obj[b] = 'the value of b';
-   console.log('a', obj[a]); // -> the value of b
-   console.log('b', obj[b]); // -> the value of b
-   /*
-     分析：
-       object转化的键值固定为[object Object]导致{}无法区分不同object
-   */
-   // 解决：  
-   var obj = new dict(), a = ['a'], b = ['b'];
-   obj.set(a, 'value of a').set(b, 'value of b');
-   console.log('a', obj[a]); // -> the value of a
-   console.log('b', obj[b]); // -> the value of b
+  // 分析以下情况
+  var obj = {}, a = ['a'], b = ['b'];
+  obj[a] = 'the value of a';
+  obj[b] = 'the value of b';
+  console.log('a', obj[a]); // -> the value of b
+  console.log('b', obj[b]); // -> the value of b
+  /*
+    分析：
+      object转化的键值固定为[object Object]导致{}无法区分不同object
+  */
+  // 解决：  
+  var obj = new dict(), a = ['a'], b = ['b'];
+  obj.set(a, 'value of a').set(b, 'value of b');
+  console.log('a', obj[a]); // -> the value of a
+  console.log('b', obj[b]); // -> the value of b
 
- ```
+```
   
 - this.dict  
-  '{}'  
+  '{}'  
   储存key为非object时的(key, value)对
   
 - this.object_dict
@@ -471,29 +471,33 @@
   储存key为object时的(key, value)对
   
 - pair  
-  当储存key为object时的(key, value)对时，将 `new this.pair(key, value)` 储存于'this.object_dict'  
+  当储存key为object时的(key, value)对时，将 `new this.pair(key, value)` 储存于'this.object_dict'  
 
   + this.key  
-    储存key值  
-  + this.value  
-    储存value值  
-  + getKey  
-    获得key值  
-  + getValue  
-    获得value值  
+    储存key值  
     
-- get  
-  对应取值操作 -> obj[key]  
+  + this.value  
+    储存value值  
+    
+  + getKey  
+    获得key值  
+    
+  + getValue  
+    获得value值  
+    
+- get  
+  对应取值操作 -> obj[key]  
 
-- set
-  对应赋值操作 -> obj[key] = value;  
+- set  
+  对应赋值操作 -> obj[key] = value  
 
 - remove  
-  对应删除操作 -> delete obj[key]  
+  对应删除操作 -> delete obj[key]  
 
 - dict.from  
-  根据两个数组keys，values创建dict对象  
-  ```js
+  根据两个数组keys，values创建dict对象  
+
+  ```js
   
     dict.from([keys], [values])
     
