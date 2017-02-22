@@ -442,25 +442,25 @@
 ##[dict.js](./dict.js)  
   代码比较简单，详细请见js文档  
 
-  ```js
-  
-    // 分析以下情况
-    var obj = {}, a = ['a'], b = ['b'];
-    obj[a] = 'the value of a';
-    obj[b] = 'the value of b';
-    console.log('a', obj[a]); // -> the value of b
-    console.log('b', obj[b]); // -> the value of b
-    /*
-      分析：
-        object转化的键值固定为[object Object]导致{}无法区分不同object
-    */
-    // 解决：  
-      var obj = new dict(), a = ['a'], b = ['b'];
-      obj.set(a, 'value of a').set(b, 'value of b');
-      console.log('a', obj[a]); // -> the value of a
-      console.log('b', obj[b]); // -> the value of b
-      
-  ```
+ ```js
+
+   // 分析以下情况
+   var obj = {}, a = ['a'], b = ['b'];
+   obj[a] = 'the value of a';
+   obj[b] = 'the value of b';
+   console.log('a', obj[a]); // -> the value of b
+   console.log('b', obj[b]); // -> the value of b
+   /*
+     分析：
+       object转化的键值固定为[object Object]导致{}无法区分不同object
+   */
+   // 解决：  
+   var obj = new dict(), a = ['a'], b = ['b'];
+   obj.set(a, 'value of a').set(b, 'value of b');
+   console.log('a', obj[a]); // -> the value of a
+   console.log('b', obj[b]); // -> the value of b
+
+ ```
   
 - this.dict - {}  
   储存key为非object时的(key, value)对
