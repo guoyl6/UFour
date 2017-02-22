@@ -442,7 +442,7 @@
 ##[dict.js](./dict.js)  
   代码比较简单，详细请见js文档  
 
-  ```
+  ```js
   
     // 分析以下情况
     var obj = {}, a = ['a'], b = ['b'];
@@ -454,7 +454,7 @@
       分析：
         object转化的键值固定为[object Object]导致{}无法区分不同object
     */
-    //解决：
+    // 解决：  
       var obj = new dict(), a = ['a'], b = ['b'];
       obj.set(a, 'value of a').set(b, 'value of b');
       console.log('a', obj[a]); // -> the value of a
@@ -481,13 +481,13 @@
     获得key值  
     
   + getValue  
-    获得value值
-
-- set  
-  对应赋值操作 -> obj[key] = value;  
-
+    获得value值  
+    
 - get  
   对应取值操作 -> obj[key]  
+
+- set
+  对应赋值操作 -> obj[key] = value;  
 
 - remove  
   对应删除操作 -> delete obj[key]  
@@ -495,7 +495,7 @@
 - dict.from  
   根据两个数组keys，values创建dict对象  
 
-  ```
+  ```js
   
     dict.from([keys], [values])
     
