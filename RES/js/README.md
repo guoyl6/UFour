@@ -477,12 +477,12 @@
     储存key值  
   + this.value  
     储存value值  
-  + getKey  
+  + getKey  
     获得key值  
-  + getValue  
+  + getValue  
     获得value值  
-
-- get  
+    
+- get  
   对应取值操作 -> obj[key]  
 
 - set
