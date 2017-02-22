@@ -1,10 +1,12 @@
 # Directory
+
+*github编辑时不知道为什么会有一些占用一个空间大小的不可见字符，就是这些字符导致解析出问题*
+
 - [fn.js](#fnjs)
 - [Activity.js](#activityjs)
 - [s.js](#sjs)
-- [dict.js](#dictjs)  
+- [dict.js](#dictjs)
 
- *github编辑时不知道为什么会有一些占用一个空间大小的不可见字符，就是这些字符导致解析出问题*
 ---
 
 ##[fn.js](./fn.js)
@@ -464,7 +466,7 @@
 ```
   
 - this.dict  
-  `{}`
+  `{}`  
   储存key为非object时的(key, value)对
   
 - this.object_dict  
