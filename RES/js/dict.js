@@ -46,7 +46,7 @@ dict.prototype.accelerate = function(pair) {
 		Object.defineProperty(key, this.accelerateTab, {
 			value: accelerateValue,
 			writable: true,
-		    enumerable: true,
+		    enumerable: false,
 		    configurable: true
 		})
 	} else {
