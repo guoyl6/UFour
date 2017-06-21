@@ -25,12 +25,12 @@ body {
 }
 
 .size1:after {
-	background-image: url(../image/www.lingyu.me_2016081812504084.jpg);
+	background-image: url(../image/abc.jpg);
 }
 
 .size1 .block {
 	background-size: 400px 400px;
-	background-image: url(../image/www.lingyu.me_2016081812504084.jpg);
+	background-image: url(../image/abc.jpg);
 	width: 100px;
 	height: 100px;
 }
