@@ -1,0 +1,526 @@
+/*size_variable*/
+:root {
+    --littleDistance: 2px;
+    --smallDistance: 8px;
+    --middleDistance: 14px;
+    --largeDistance: 20px;
+
+    --titleWeight: 600;
+
+    font-size: 16px;
+
+
+}
+
+/*color_variable*/
+:root {
+    --colorGreen: #00ffb8;
+    --colorBlue: #5cbbff;
+    --colorYellow: #bbd651;
+    --colorDark: #cecece;
+    --colorOrange: #ff9800;
+    --colorBlackThin: #111;
+    --colorWhiteThin: #eee;
+    --color: var(--colorBlackThin);
+
+    --colorWhiteT: rgba(255,255,255,.7);
+
+    
+}
+
+/*speed_variable*/
+:root {
+    --speedNormal: .5s;
+    --speedSlow: calc(var(--speedNormal) * 4);
+    --speedSSlow: calc(var(--speedSlow) * 4);
+}
+
+/* print */
+:root {
+    --paperWidth: 1487px;
+    --paperHeight: 2105px;
+}
+
+
+/*variable*/
+.jl-area {
+
+}
+
+.me {
+    --imgsize: 100px;
+}
+
+.me a {
+    --color: var(--colorBlue);
+}
+
+.information {
+    --size: 100px;
+    --height: 25px;
+    --color: var(--colorDark);
+    --lineHeight: 2px;
+}
+
+.introduction {
+    --height: 200px;
+    --color: var(--colorBlackThin);
+}
+
+
+/*jl-area*/
+
+.jl-area {
+    
+    margin: auto;
+    padding: var(--smallDistance);
+}
+
+.me {
+    padding: var(--middleDistance);
+
+}
+
+.me .img {
+    
+    display: inline-block;
+    width: var(--imgsize);
+    height: var(--imgsize);
+    border-radius: var(--imgsize);
+    overflow: hidden;
+}
+
+.skill-tree {
+    --height: 250px;
+    --width: 20px;
+    --nameHeight: 20px;
+    --levelHeight: calc(var(--height) - var(--nameHeight));
+    --spacing: 20px;
+    --font-size: 14px;
+    --rotateDeg: -30deg;
+}
+
+.work-willing {
+    --size: 90px;
+    --titlebgc: var(--colorGreen);
+    --workDistance: 50px;
+    --lineSize: 2px;
+    --linebgc: var(--colorBlue);
+    --circleSize: calc(var(--size) * 3 + var(--workDistance) * 2);
+}
+
+.skill-tree {
+    --color: var(--colorOrange);
+}
+
+.work-willing {
+    --color: var(--colorWhiteThin);
+}
+
+.work-willing>.title {
+    --color: var(--colorBlackThin);
+}
+
+.experience {
+    --width: 4px;
+    --dateWidth: 80px;
+    --dateHeight: 30px;
+    --descriptionSize: 320px;
+    --bgcolor: var(--colorBlue);
+    --linkBgc: rgba(0, 150, 136, .8);
+    --pointbgc: var(--colorGreen);
+    --color: #d3e800;
+}
+
+/* 
+    information
+ */
+.information {
+    padding: var(--smallDistance);
+}
+
+.information>.title,
+.information>.description {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    line-height: var(--height);
+}
+
+.information>.title {
+    width: var(--size);
+    color: var(--titleColor);
+    font-weight: var(--titleWeight);
+    font-size: 18px;
+    text-align: right;
+}
+
+.information>.description.fs-lg {
+    font-size: 20px;
+}
+
+.information>.title+.description {
+    --descriptionSize: calc(100% - var(--size) * 1.5);
+    width: var(--descriptionSize);
+    padding-left: calc(var(--size) * 0.5);
+}
+
+.information>.title+.description:before {
+    content: "";
+    display: block;
+    width: calc(var(--size) * 0.4);
+    height: var(--lineHeight);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    margin: auto;
+    background-color: var(--colorBlue);
+}
+
+/* 
+    skill tree
+ */
+
+.skill-tree {
+    padding: var(--smallDistance);
+}
+
+.skill-tree>.skill:first-child {
+    margin-left: 0;
+}
+
+.skill-tree>.skill {
+    display: inline-block;
+    height: var(--height);
+    width: var(--width);
+    position: relative;
+    margin-left: var(--spacing);
+}
+
+.skill-tree>.skill>.name {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateX(calc((var(--width) - 100%) / 2)) rotate(var(--rotateDeg));
+    text-align: center;
+    line-height: var(--nameHeight);
+}
+
+.skill-tree>.skill>.level {
+    display: block;
+    width: 100%;
+    height: 0;
+    position: absolute;
+    bottom: var(--nameHeight);
+    left: 0;
+    height: calc(var(--height) - var(--nameHeight));
+}
+
+.skill-tree>.skill>.level.understand {
+    background-color: var(--colorDark);
+    height: calc(var(--levelHeight) * 0.25);
+}
+
+.skill-tree>.skill>.level.normal {
+    background-color: var(--colorYellow);
+    height: calc(var(--levelHeight) * 0.5);
+}
+
+.skill-tree>.skill>.level.skilled {
+    background-color: var(--colorGreen);
+    height: calc(var(--levelHeight) * 0.75);
+}
+
+.skill-tree>.skill>.level.expert {
+    background-color: var(--colorBlue);
+    height: calc(var(--levelHeight) * 1);
+}
+
+/*experience*/
+
+.experience {
+    display: inline-block;
+
+    width: var(--width);
+    position: relative;
+
+    background-color: var(--bgcolor);
+    padding: var(--largeDistance) 0;
+    margin-left: var(--dateWidth);
+}
+
+.experience>.date {
+    width: var(--dateWidth);
+    height: var(--dateHeight);
+    line-height: var(--dateHeight);
+    padding-right: var(--smallDistance);
+
+    position: relative;
+    top: 0;
+    left: calc(var(--dateWidth) * -1);
+
+    text-align: right;
+}
+
+.experience>.date:before {
+    content: "";
+
+    display: block;
+    --size: calc(var(--width) * 2);
+
+    width: var(--size);
+    height: var(--size);
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: calc(var(--size) * -0.75);
+
+    margin: auto;
+
+    border-radius: calc(var(--size) / 2);
+    background-color: var(--pointbgc);
+    font-size: 0;
+}
+
+.experience>.description {
+    width: var(--descriptionSize);
+    
+    position: relative;
+
+    margin-top: calc(var(--dateHeight) * -1);
+    margin-left: var(--width);
+    padding: var(--smallDistance);
+    
+
+}
+
+.experience>.description+.date {
+    margin-top: var(--middleDistance);
+}
+
+.experience>.description>.img {
+    width: calc(var(--descriptionSize));
+    position: relative;
+    left: calc(var(--descriptionSize) + var(--middleDistance));
+    z-index: 9999;
+}
+
+.experience>.description>.img>.link {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: var(--smallDistance);
+}
+
+/*introduction*/
+
+.introduction {
+    padding: var(--largeDistance) var(--middleDistance);
+    text-align: center;
+    height: var(--height);
+}
+
+.introduction:after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.introduction>.vc {
+    display: inline-block;
+    vertical-align: middle;
+    padding: var(--smallDistance);
+    text-indent: 2em;
+    text-align: left;
+    max-width: 98%;
+}
+
+/* work-willing */
+.work-willing {
+    display: inline-block;
+    width: var(--circleSize);
+    height: var(--circleSize);
+    position: relative;
+    text-align: center;
+    padding: var(--smallDistance);
+    padding-top: calc((var(--circleSize) - var(--size)) * 0.5);
+}
+
+.work-willing>.title,
+.work-willing>.work {
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    line-height: var(--size);
+    border-radius: var(--size);
+}
+
+.work-willing>.title {
+    background-color: var(--titlebgc);
+    box-shadow: 0 0 5px 5px var(--colorGreen);
+    position: relative;
+    font-weight: var(--titleWeight);
+    z-index: 2;
+}
+
+.work-willing>.work {
+    position: absolute;
+    margin-left: calc((var(--size) * 2 + var(--workDistance)) * -1);
+    z-index: 1;
+    text-align: right;
+    transform-origin: calc(var(--size) * 1.5 + var(--workDistance)) calc(var(--size) * 0.5);
+}
+
+.work-willing>.work:after {
+    content: "";
+    display: block;
+    width: var(--workDistance);
+    height: var(--lineSize);
+    
+    position: absolute;
+    left: var(--size);
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    background-color: var(--linebgc);
+}
+
+
+/*media*/
+
+@media screen and (max-width: 992px) {
+    .experience>.description>.img {
+        position: relative;
+        left: calc(var(--descriptionSize) * .4);
+        right: 0;
+        margin: var(--smallDistance) 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .introduction {
+        --height: auto;
+
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .experience {
+        --descriptionSize: 250px;
+    }
+
+}
+
+/*animation*/
+
+@keyframes height_growing
+{
+    0%   {height: 0;}
+    100% {}
+}
+
+@keyframes work_willing_rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.skill-tree>.skill>.level.understand,
+.skill-tree>.skill>.level.normal,
+.skill-tree>.skill>.level.skilled,
+.skill-tree>.skill>.level.expert {
+    animation: height_growing var(--speedNormal);
+}
+
+
+.experience>.description>.img {
+    transition: transform var(--speedNormal);
+    transform-origin: 100% 100%;
+}
+
+.experience>.description>.img:hover {
+    transform: scale(1.5);
+}
+
+.experience>.description>.img>.link {
+    transition: background-color var(--speedNormal), opacity var(--speedNormal);
+    opacity: 0;
+}
+
+.experience>.description>.img:hover>.link {
+    background-color: var(--linkBgc);
+    opacity: 1;
+}
+
+.work-willing,
+.work-willing>.title {
+    -webkit-animation: work_willing_rotate var(--speedSSlow) linear  infinite;
+    -o-animation: work_willing_rotate var(--speedSSlow) linear  infinite;
+    animation: work_willing_rotate var(--speedSSlow) linear  infinite;
+}
+
+.work-willing>.title {
+    -webkit-animation-direction: reverse;
+    -o-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.work-willing>.work:nth-child(3) {
+    transform: rotate(180deg);
+}
+
+/*page*/
+
+.experience>.description>.img {
+    border: 4px solid var(--colorWhiteT);
+    box-shadow: 0 0 5px 5px var(--colorDark);
+    border-radius: 2px;
+}
+
+.information>.title+.description:before,
+.experience {
+    border-radius: 10px 0 10px 0;
+}
+
+.bgs {
+    background-color: rgba(0,0,0,.3);
+    border-radius: 0px 15px 15px;
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-image: url(../image/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    filter: blur(5px);
+}
+
+* {
+    color: var(--color, #f9f8f7);
+    font-size: var(--font-size, inherit);
+}
+
+.jl-area {
+    overflow: hidden;
+}

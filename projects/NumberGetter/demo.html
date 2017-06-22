@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8"/>
+	<title>numberGetter</title>
+	<script type="text/javascript" src="./golbalVariableChecking.js"></script>
+	<script type="text/javascript" src="./jquery-1.11.0.js"></script>
+	<script type="text/javascript" src="./NumberGetter.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var arr = ['你好', 'hello', '1234', '啦啦啦', 'test', '测试', 'fdkc', '风纪扣拉萨']
+			$('#special').data('getter', function(num) {
+				return arr[num];
+			}).on('itemActive', function(e, $now, $last) {
+				console.log('from', $last.data('value'), 'to', $now.data('value'));
+			})
+			$("#combine").data('getter', function(num) {
+				var $dom = $('<div class="numberGetter horizontal"></div>').data({
+					vertical: false,
+					start: 0,
+					end: 8
+				});
+				setTimeout($dom.NumberGetter.bind($dom));
+				return $dom;
+			})
+			$(".numberGetter").NumberGetter();
+
+			$('#special').NumberGetter('off', 'mouse');
+			console.log($("#special").NumberGetter('value'));
+			console.log($("#special").NumberGetter('serializeArray'));
+
+			checkGlobal();
+		})
+	</script>
+	<style>
+		#area {
+			width: 80%;
+			margin: 10px auto;
+		}
+
+		.numberGetter {
+			width: 100%;
+			height: 250px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.numberGetter .view {
+			border-color: #ddd;
+			border-style: solid;
+			border-width: 1px 0;
+			width: 100%;
+			height: 50px;
+		}
+	
+		.numberGetter .view .item {
+			width: 100%;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			color: #ddd;
+			padding: 1px;
+		}
+
+		.numberGetter>.view>.items>.item.active {
+			color: #2196f3;
+		}
+
+		#combine>.view {
+			overflow: hidden;
+		}
+
+		#combine .numberGetter.horizontal {
+			height: 180px;
+			margin: 10px 0;
+		}
+
+		#combine .numberGetter>.view {
+			color: #ddd;
+			border-width: 0 1px;
+			width: 80%;
+			height: 100%;
+		}
+
+		#combine .numberGetter>.view>.items>.item {
+			color: #ddd;
+		}
+
+		#combine .item.active .numberGetter>.view>.items>.item {
+			color: orange;
+		}
+
+		#combine .item.active .numberGetter>.view>.items>.item.active {
+			color: #2196f3;
+		}
+
+
+		#combine .numberGetter>.view>.items {
+			z-index: -1;
+		}
+
+		#combine>.view, #combine>.view>.items>.item {
+			height: 200px;
+			line-height: 200px;
+		}
+
+
+
+	</style>
+</head>
+<body>
+	<div id="area">
+		<p>垂直滚动</p>
+		<div class="numberGetter" data-start="1" data-end="10" data-active="4" data-scale='1'></div>
+		<p>水平滚动</p>
+		<div class="numberGetter horizontal" id='horizontal' data-vertical="false" data-start="0" data-end="8" data-active="0"></div>
+		<p>垂直循环滚动</p>
+		<div class="numberGetter" data-start="1" data-end="10" data-active="4" data-circle='true'></div>
+		<p>水平循环滚动</p>
+		<div class="numberGetter" id='special' data-vertical="false" data-start="0" data-end="8" data-active="0" data-name="test" data-circle='true' data-reverse='true'></div>
+		<p>嵌套</p>
+		<div id="combine" class="numberGetter" data-start="0" data-end="3" data-active="0" data-circle="true"></div>
+	</div>
+</body>
+</html>

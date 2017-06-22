@@ -1,0 +1,15 @@
+/js
+	/page
+		index.js
+	/lib
+	/common
+/css
+	/page
+		index.css
+	/lib
+	/common
+/image
+	/common
+	/page
+/page
+index.html
