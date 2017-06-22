@@ -130,6 +130,11 @@
     --linkBgc: rgba(0, 150, 136, .8);
     --pointbgc: var(--colorGreen);
     --color: #d3e800;
+    --hoverColor: var(--colorBlue);
+}
+
+.experience>.description>.img>.link>a:hover {
+    --color: var(--hoverColor);
 }
 
 /* 
@@ -315,6 +320,11 @@
     top: 0;
     left: 0;
     padding: var(--smallDistance);
+}
+
+
+.experience>.description>.img>.link>a {
+    margin: 0 var(--smallDistance);
 }
 
 /*introduction*/
