@@ -1,0 +1,188 @@
+body, html {
+    width: 98%;
+	min-width: 800px;
+	min-height: 800px;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 98%;
+	margin: 1% 0px 0px 1.5%;
+	background-attachment: fixed;
+	background-color: #CCFFFF;
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	
+}
+
+ p {
+ 	word-break:break-all;
+ }
+
+.center {
+	position: absolute;
+	top: 30%;
+	left: 15%;
+}
+
+#login_area {
+	width: 50%;
+	min-width: 400px;
+	min-height: 150px;
+}
+
+#login_area input {
+	border-radius: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	display: inline;
+	font-size: 18px;
+}
+
+#login_area button {
+	font-size: 18px;
+}
+
+#error {
+	padding-bottom: 3px;
+	height: 20px;
+	text-align: center;
+	opacity: 0;
+}
+
+#communicate, #content {
+	width: 47.5%;
+	height: 98%;
+	float: left;
+	position: relative;
+	background-color: rgba(126, 214, 255, 0.3);
+}
+
+#content {
+	margin-right: 1%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#showing, #picindex {
+	width: 98%;
+	margin: 5% 1% 1% 1%;
+}
+
+#showing img, #picindex img {
+	width: 100%;
+	max-width: 600px;
+}
+
+#upload {
+	width: 92%;
+	height: 7%;
+	margin: 1% 0px 1% 4%;
+	position: relative;
+	border-radius: 10px;
+	background-color: rgba(199, 157, 188, 0.3);
+}
+
+.hide {
+	position: absolute;
+	top: -50px;
+}
+
+#sendpt {
+	position: absolute;
+	top: 10%;
+	overflow: hidden;
+	border-radius: 15px;
+	padding-left: 3px;
+}
+
+#id_state h4 {
+	margin-top: 0px;
+}
+
+#id_state {
+	width: 98%;
+	height: 7%;
+	font-size: 23px;
+	text-align: center;
+	color: rgb(100, 157, 199);
+	border-radius: 10px;
+	background-color: rgba(199, 157, 188, 0.3);
+}
+
+#message {
+	position: absolute;
+	top: 10%;
+	width: 98%;
+	height: 70%;
+}
+
+#input {
+	position: absolute;
+	width: 100%;
+	top: 80%;
+	height: 20%;
+}
+
+#input #words {
+	font-size: inherit;
+	height: 90%;
+	opacity: 0.9;
+	background-color: rgb(250, 255, 250);
+}
+
+#words {
+	width: 98%;
+}
+
+#inputarea {
+	height: 80%;
+}
+
+
+#controlarea {
+	position: absolute;
+	bottom: 1%;
+	right: 0px;
+	color: yellowgreen;
+	text-align: right;
+}
+
+#inputarea, #controlarea, #id_state {
+	margin: 1% 0px 0px 1%;
+}
+
+#controlarea button {
+	padding-left: 4px;
+	padding-right: 4px;
+	font-size: 18px;
+}
+
+#input, #message, #inputarea, #controlarea, #message div {
+	width: 99%;
+}
+
+#message {
+	overflow: auto;
+}
+
+#message div {
+	background-color: rgba(126, 214, 255, 0.8);
+	margin-left: 1%;
+}
+
+#message div p {
+	padding-left: 50px;
+	padding-right: 10px;
+	margin: 0px;
+}
+
+#message div span {
+	font-weight: bolder;
+	color: gray;
+}

@@ -1,0 +1,13 @@
+{
+  "name": "groupwork",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./index"
+  },
+  "dependencies": {
+    "express": "~4.13.1",
+    "ejs": "2.3.4",
+    "socket.io": "1.4.4"
+  }
+}

@@ -9,7 +9,7 @@
 
 ---
 
-##[fn.js](./fn.js)
+## [fn.js](./fn.js)
 
 *给function添加一些常用方法*
 
@@ -166,7 +166,7 @@
 
 ---
 
-##[Activity.js](./Activity.js)  
+## [Activity.js](./Activity.js)  
 
 - 依赖库  
   ***require jQuery, fn.js***
@@ -304,7 +304,7 @@
 
 ---
 
-##[s.js](./s.js)  
+## [s.js](./s.js)  
 
 - 依赖库  
   ***require fn.js***
@@ -442,7 +442,7 @@
     
   ```
   
-##[dict.js](./dict.js)  
+## [dict.js](./dict.js)  
   代码比较简单，详细请见js文档  
 
 ```js

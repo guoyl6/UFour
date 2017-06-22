@@ -1,0 +1,46 @@
+body {
+	background-color: white;
+	font-family: cursive;
+	font-size: 14pt;
+	text-align: center;
+}
+
+h1 {
+	margin: 10px 0px;
+}
+
+a {
+	font-size: 30px;
+	text-decoration: none;
+}
+
+a:link {color: #FF9966}     /* 未访问的链接 */
+a:visited {color: #FF9966}  /* 已访问的链接 */
+a:hover {color: #FF9966}    /* 当有鼠标悬停在链接上 */
+a:active {color: #FF9966}   /* 被选择的链接 */
+
+#playarea, h1 {
+	position: relative;
+	max-width: 400px;
+	max-height: 400px;
+	margin: 0px auto;
+	background-color: #D0D0D0;
+}
+
+#controlarea {
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+}
+
+#controlstate, .playpiece {
+	border-radius: 6px;
+	background-color: gray;
+}
+
+.playpiece {
+	position: absolute;
+	margin: 2px 2px;
+	padding: 0px;
+	font-size: 25px;
+}

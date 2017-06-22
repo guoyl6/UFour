@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>OFTS</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{{static_url('css/WM.css')}}">
+	<link rel="shortcut icon" type="image/gif" href="{{static_url('images/favicon.gif')}}">
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+	<script src="{{static_url('js/ajaxfileupload.js')}}"></script>
+	<script src="{{static_url('js/index.js')}}"></script>
+</head>
+<body>
+	<div id="content">
+		<div id="upload">
+			<div class="hide">
+				<input id="getpt" type="file" name="pic" accept="image/jpeg">
+			</div>
+			<div id="sendpt">
+				Show Your Favorite Picture ==> <button type="button">click!</button>
+			</div>
+		</div>
+
+		<div id="showing">
+			<p style="display:none" id="lgth">0</p>
+			<h4>background.jpg</h4>
+			<img src="{{static_url('images/background.jpg')}}" alt="Picture not found...">
+		</div>
+
+		<div id="picindex">
+			<input type='button' id="last" value='<'>
+			<input type='text' id='position'>
+			<input type='button' id="next" value='>'>
+			<hr>
+			<img src="{{static_url('images/background.jpg')}}" alt="Picture not found...">
+		</div>
+	</div>
+	<div id="communicate">
+		<div id="id_state" name="{{ID}}">
+			{%if ID%}
+				Hello <span>{{ID}}!</span>
+			{%else%}
+				Hello <span>路人</span>
+				<a href="/login">login</a>
+			{%end%}
+			<h4>Welcome!</h4>
+		</div>
+		<div id="message">
+			<p style="display:none" id="index">{{index}}</p>
+			{%if index > 0%}
+				<a href="#" id="getMore">看看大家还聊了什么</a>
+			{%end%}
+		</div>
+		<form id="input">
+			<div id="inputarea">
+				<textarea autofocus id="words"></textarea>
+			</div>
+			<div id="controlarea">
+				<input type="checkbox" id="rt" checked="checked"> 跟进对话
+				<input type="checkbox" id="not_name"> 变回路人
+				<button type='button' id="send">send</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
