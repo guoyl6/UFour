@@ -1,0 +1,46 @@
+.game {
+	box-shadow: 0 0 1px black;
+	font-size: 0;
+	width: 400px;
+	height: 400px;
+	margin: 10px auto;
+	position: relative;
+}
+
+.piece {
+	width: 100px;
+	height: 100px;
+	margin: 0;
+	font-size: 20px;
+	line-height: 80px;
+	text-align: center;
+	border: 10px solid white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: orange;
+	border-radius: 20px;
+	transition: transform .5s;
+}
+
+@keyframes scaleIn
+{
+    0%   {font-size: 0;}
+    70%  {font-size: 25px;}
+    100% {}
+}
+
+@keyframes a_rm
+{
+    0%   {opacity: 1}
+    100% {opacity: 0}
+}
+
+.piece.added {
+	animation: scaleIn .5s;
+}
+
+.piece.to_remove {
+	animation: a_rm .5s .5s;
+	z-index: -1;
+}
