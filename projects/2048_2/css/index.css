@@ -20,27 +20,20 @@
 	left: 0;
 	background: orange;
 	border-radius: 20px;
-	transition: transform .5s;
 }
 
 @keyframes scaleIn
 {
-    0%   {font-size: 0;}
-    70%  {font-size: 25px;}
+    0%   {font-size: 0; opacity: 0;}
+    70%  {font-size: 25px; opacity: 1;}
     100% {}
-}
-
-@keyframes a_rm
-{
-    0%   {opacity: 1}
-    100% {opacity: 0}
 }
 
 .piece.added {
 	animation: scaleIn .5s;
 }
 
-.piece.to_remove {
-	animation: a_rm .5s .5s;
-	z-index: -1;
+.score {
+	line-height: 2em;
+	font-size: 1.4em;
 }

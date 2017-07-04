@@ -20,6 +20,8 @@ Game_2048.defaultOption = {
 	col: 4
 }
 
+Game_2048.directions = ['left', 'right', 'down', 'up'];
+
 Game_2048.appearNumbers = [2, 4];
 
 
@@ -69,6 +71,16 @@ Game_2048.prototype.nextNum = function() {
 		index: index,
 		value: value
 	};
+}
+
+Game_2048.prototype.isDead = function() {
+	var t = this.clone();
+	for (var i = Game_2048.directions.length; i--;) {
+		if (t.next(Game_2048.directions[i]).isChanged) {
+			return false;
+		}
+	}
+	return true;
 }
 
 
@@ -130,17 +142,17 @@ Game_2048.prototype.getChange = function(direction) {
 			xy.next.value = xy.action == "double" ? xy.value * 2 : xy.value;
 		}, this);
 
-		rest.push.apply(rest,
-			arr.filter(function(xy) {
-				return xy.action != "delete";
-			}).map(function(xy, index) {
-				xy = $.extend(true, {}, xy);
-				xy.next[updateKey] = reverse ? this.option[updateKey] - 1 - index : index;
-				xy.next.index = this.toIndex(xy.next);
-				xy.next.value = xy.action == "double" ? xy.value * 2 : xy.value;
-				return xy;
-			}, this)
-		);
+		var a_d = 0;
+		arr.forEach(function(xy) {
+			xy.next[updateKey] += reverse ? a_d : -a_d;
+			xy.next.index = this.toIndex(xy.next);
+			xy.next.value = xy.action == "double" ? xy.value * 2 : xy.value;
+			if (xy.action == "delete") {
+				a_d++;
+			} else {
+				rest.push(xy);
+			}
+		}, this);
 
 	}
 
@@ -152,7 +164,8 @@ Game_2048.prototype.getChange = function(direction) {
 		rest: rest,
 		isChanged: !!rest.filter(function(xy) {
 			return xy.index != xy.next.index;
-		}).length
+		}).length,
+		direction: direction
 	};
 }
 
@@ -173,6 +186,12 @@ Game_2048.prototype.toIndex = function(xy) {
 		throw "index out of range: [" + 0 + ", " + this.length + "] -->" + xy;
 	}
 	return index;
+}
+
+Game_2048.prototype.clone = function() {
+	var t = new Game_2048(this.option);
+	t.data = this.data.slice();
+	return t;
 }
 
 }(jQuery);

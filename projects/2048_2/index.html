@@ -5,6 +5,7 @@
 	<meta charset="utf-8"/>
 	<title>2048小游戏</title>
 	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery-transit/0.9.12/jquery.transit.min.js"></script>
 	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -15,12 +16,21 @@
 	<link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
+	<header>
+		<h1 class='text-center'>2048小游戏</h1>
+	</header>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+			<div class="col-xs-12 col-md-3 col-md-push-8 text-center">
+				<p class="text-info bg-info">Score: <span class="score">0</span></p>
+			</div>
+			<div class="col-xs-12 col-md-6 col-md-pull-1 text-center">
 				<div class="game"></div>
 			</div>
 		</div>
 	</div>
+	<footer class='text-center'>
+		WASD控制方向
+	</footer>
 </body>
 </html>

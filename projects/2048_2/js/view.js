@@ -1,79 +1,114 @@
 window.view = {
+	duration: 300,
 	createPiece: function(xy, value) {
 		var $dom = $("<div></div>")
 		.text(value)
 		.addClass('piece');
-		this.updatePiece($dom, xy, value);
+		this.setStyle($dom, xy, value).bindData($dom, xy, value);
 		return $dom;
 	},
 	cssValue: function(xy) {
 		return {
-			transform: 'translate(' + [xy.col * 100, xy.row * 100].join('%,') + '%)'
+			translate: [xy.col * 100, xy.row * 100].join('%,')
 		}
 	},
-	updatePiece: function($piece, xy, value) {
+	setStyle: function($piece, xy, value) {
+		$piece.css(this.cssValue(xy));
+		return this;
+	},
+	bindData: function($piece, xy, value) {
 		if (!value) {
 			$piece.remove();
 		}
-		$piece.css(this.cssValue(xy)).data({
+		$piece.data({
 			index: xy.index,
 			value: value
-		}).text(value);
+		})
+		.text(value)
+		.addClass("val_" + value);
 		return this;
 	},
-	init: function($dom, game2048) {
+	movePiece: function($piece, xy, direction) {
+		var self = this,
+			nextValue = self.cssValue(xy.next),
+			dis = Math.abs(xy.next.row - xy.row) + Math.abs(xy.next.col - xy.col),
+			time = self.duration,
+			deferred = $.Deferred(), promise = deferred.promise();
+
+		if (xy.action == "delete") {
+			time = time * dis / (dis + 1);
+			promise = promise.then(function() {
+				return $piece.fadeOut(self.duration - time)
+				.promise().done(function() {
+					$piece.remove();
+				});
+			})
+		}
+
+		$piece.transition(nextValue, {
+			duration: time,
+			easing: 'linear',
+			complete: function() {
+				deferred.resolve();
+				self.bindData($piece, xy.next, xy.next.value);
+			}
+		})
+
+		return promise;
+	},
+	initDom: function(game2048) {
+		var $dom = this.$game;
 		$dom.empty().append(game2048.data.map(function(value, index) {
 			return value ? this.createPiece(game2048.xy(index), value) : "";
 		}, this))
 		return this;
 	},
-	render: function ($dom, game2048, obj) {
-		var self = this, $added = self
+	updateDom: function (game2048, obj) {
+		var self = this,
+			$dom = self.$game,
+			$added = self
 		.createPiece(game2048.xy(obj.added), game2048.data[obj.added])
 		.addClass('added');
+
 		var moveData = {}, eatData = {}, restData = {};
 		obj.move.forEach(function(t) {
-			moveData[t.index] = t.next.index;
+			moveData[t.index] = t;
 		});
 		obj.eated.forEach(function(t) {
-			eatData[t.index] = t.next.index;
+			eatData[t.index] = t;
 		});
 		obj.rest.forEach(function(t) {
-			restData[t.index] = t.next.index;
-		})
-		var time = null;
-		$dom.children().each(function() {
-			var index = $(this).data('index'),
-				nextIndex = index in restData ? restData[index] : moveData[index];
+			restData[t.index] = t;
+		});
+		
+		return $.when.apply($, 
+			$dom.children().toArray().map(function(dom) {
+				var $piece = $(dom),
+					index = $piece.data('index'),
+					xy = index in restData ? restData[index] : moveData[index];
 
-			time = time === null ? +/[0-9]+.?[0-9]*(?=s)/.exec($(this).css('transition'))[0] * 1000 : time;
-
-			$(this)
-			.css(self.cssValue(game2048.xy(nextIndex)), $(this).data('value'))
-			.addClass(index in restData ? '' : 'to_remove');
-
-		})
-
-		setTimeout(function() {
-			$dom.children().each(function() {
-				var index = $(this).data('index'),
-					nextIndex = restData[index];
-
-				if (!(index in restData)) {
-					$(this).fadeOut(function() {
-						$(this).remove();
-					})
-					return;
-				}
-
-				self.updatePiece($(this), game2048.xy(nextIndex), game2048.data[nextIndex]);
-
+				return self.movePiece($piece, xy, obj.direction);
 			})
+		).done(function() {
 			$dom.append($added);
+		});
 
-		}, time);
-
-
-		return this;
-	}
+	},
+	updateScore: function(value) {
+		this.$score.text(value);
+	},
+	showDead: function($dom) {
+		this.$score.addClass('text-danger');
+	},
+	init: function() {
+		this.$game = $(".game");
+		this.$score = $(".score");
+		this.moving = false;
+		this.load.resolve();
+	},
+	load: $.Deferred()
 }
+
+$(function() {
+	view.init();
+})
