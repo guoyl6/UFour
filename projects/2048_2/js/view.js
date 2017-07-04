@@ -50,7 +50,7 @@ window.view = {
 		if (xy.action == "delete") {
 			time = time * dis / (dis + 1);
 			promise = promise.then(function() {
-				return $piece.fadeOut(self.duration - time)
+				return $piece.transition({opacity: 1}, self.duration - time)
 				.promise().done(function() {
 					$piece.remove();
 				});
