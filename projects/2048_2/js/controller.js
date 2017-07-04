@@ -36,14 +36,14 @@ $(function() {
 
 	var updateScore = function() {
 		view.updateScore(game2048.data.reduce(function(prevValue, value) {
-			return Math.max(prevValue, value);
+			return prevValue + value;
 		}, 0))
 	}
 
 	var bindController = function() {
 		var $game = view.$game;
 
-		$('body').on('keydown', function(e) {
+		$('body').on('keyup', function(e) {
 			// console.log(e);
 			var key = String.fromCharCode(e.which).toLowerCase();
 			switch(key) {
@@ -60,6 +60,45 @@ $(function() {
 					$game.trigger('right');
 					break;
 			}
+		})
+
+		var touchObj = null, lmd = 50;
+
+		$('body').on('touchstart', '.game', function(e) {
+			if (touchObj) {
+				return;
+			}
+			touchObj = e.originalEvent.targetTouches[0];
+			e.preventDefault();
+			return false;
+		}).on('touchmove', '.game', function(e) {
+			if (!touchObj) {
+				return;
+			}
+			var now = e.originalEvent.targetTouches[0],
+				disX = now.screenX - touchObj.screenX,
+				disY = now.screenY - touchObj.screenY;
+
+			if (Math.abs(disX) >= lmd || Math.abs(disY) >= lmd) {
+				touchObj = null;
+				if (disX <= -lmd) {
+					$game.trigger('left');
+				} else if (disX >= lmd) {
+					$game.trigger('right');
+				} else if (disY <= -lmd) {
+					$game.trigger('up');
+				} else if (disY >= lmd) {
+					$game.trigger('down');
+				}
+			}
+			// touchObj = null;
+			e.preventDefault();
+			return false;
+		}).on('touchend', '.game', function(e) {
+			var end = e.originalEvent.changedTouches[0];
+			touchObj = null;
+			e.preventDefault();
+			return false;
 		})
 	}
 		
