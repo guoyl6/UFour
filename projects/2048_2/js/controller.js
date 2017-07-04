@@ -65,11 +65,18 @@ $(function() {
 		
 	var init = function() {
 
+		restart();
+		bindEv();
+		bindController();
+	}
+
+	var restart = function() {
+		game2048.reset(game2048.length);
+		game2048.nextNum();
 		game2048.nextNum();
 		view.initDom(game2048);
 		updateScore();
-		bindEv();
-		bindController();
+		
 	}
 
 	view.load.done(init);

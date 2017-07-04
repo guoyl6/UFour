@@ -1,25 +1,43 @@
 .game {
 	box-shadow: 0 0 1px black;
 	font-size: 0;
-	width: 400px;
-	height: 400px;
 	margin: 10px auto;
 	position: relative;
+	background-color: #bbada0;
+	max-width: 400px;
+}
+
+.block,
+.pieces {
+	width: 100%;
+	height: 100%;
+}
+
+.block>div,
+.piece {
+	margin: 0;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.block>div {
+	display: inline-block;
+	background-color: rgba(255,255,255,.7);
+	border: 10px solid #bbada0;
+	box-shadow: 0 0 5px 0px #bbada0;
 }
 
 .piece {
-	width: 100px;
-	height: 100px;
-	margin: 0;
+	width: calc(25% - 20px);
+	height: calc(25% - 20px);
 	font-size: 20px;
+	font-weight: bold;
 	line-height: 80px;
 	text-align: center;
-	border: 10px solid white;
-	position: absolute;
-	top: 0;
-	left: 0;
 	background: orange;
-	border-radius: 20px;
+	top: 10px;
+	left: 10px;
 }
 
 @keyframes scaleIn
@@ -27,6 +45,15 @@
     0%   {font-size: 0; opacity: 0;}
     70%  {font-size: 25px; opacity: 1;}
     100% {}
+}
+
+@keyframes ss {
+	0% {
+		box-shadow: 0 0 3px #ffffff, 0 0 8px #e8ea38;
+	}
+	100% {
+		
+	}
 }
 
 .piece.added {
@@ -37,3 +64,77 @@
 	line-height: 2em;
 	font-size: 1.4em;
 }
+
+.piece.val_2 {
+	background: #eee4da;
+	color: #333;
+}
+
+.piece.val_4 {
+	background: #ede0c8;
+	color: #333;
+}
+
+.piece.val_8 {
+	background: #efc67b;
+	color: #333;
+}
+
+.piece.val_16 {
+	background: #ffd65a;
+	color: #333;
+}
+
+.piece.val_32 {
+	background: #ec9558;
+	color: #333;
+}
+
+.piece.val_64 {
+	background: #ff8d00;
+	color: #eee;
+}
+
+.piece.val_128 {
+	box-shadow: 0 0 3px #ffffff;
+}
+
+.piece.val_256 {
+	box-shadow: 0 0 3px #ffffff, 0 0 8px #83ffaf;
+}
+
+.piece.val_512 {
+	background: #fd7f35;
+}
+
+.piece.val_1024 {
+	animation: ss 1s linear 0s infinite alternate;
+}
+
+.piece.val_2048 {
+	box-shadow: 0 0 3px #ffffff, 0 0 8px #00aaff;
+	background: #d9edf7;
+	color: #00BCD4;
+	animation-duration: 2s;
+}
+
+.piece.val_4096 {
+	
+}
+
+.piece.val_8192 {
+	
+}
+
+.piece.val_16384 {
+	
+}
+
+.piece.val_32768 {
+	
+}
+
+.piece.val_65536 {
+	
+}
+

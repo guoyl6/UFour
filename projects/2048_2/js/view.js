@@ -7,13 +7,25 @@ window.view = {
 		this.setStyle($dom, xy, value).bindData($dom, xy, value);
 		return $dom;
 	},
-	cssValue: function(xy) {
+	blockCss: function(xy) {
 		return {
-			translate: [xy.col * 100, xy.row * 100].join('%,')
+			width: this.blockSize.width,
+			height: this.blockSize.height,
+			translate: [this.blockSize.width * xy.col, this.blockSize.height * xy.row]
 		}
 	},
+	pieceCss: function(xy) {
+		var prt = this.blockCss(xy);
+		prt.top = 10;
+		prt.left = 10;
+		prt.width -= 20;
+		prt.height -= 20;
+		prt.lineHeight = prt.height + "px";
+		return prt;
+	},
+
 	setStyle: function($piece, xy, value) {
-		$piece.css(this.cssValue(xy));
+		$piece.css(this.pieceCss(xy));
 		return this;
 	},
 	bindData: function($piece, xy, value) {
@@ -30,7 +42,7 @@ window.view = {
 	},
 	movePiece: function($piece, xy, direction) {
 		var self = this,
-			nextValue = self.cssValue(xy.next),
+			nextValue = self.pieceCss(xy.next),
 			dis = Math.abs(xy.next.row - xy.row) + Math.abs(xy.next.col - xy.col),
 			time = self.duration,
 			deferred = $.Deferred(), promise = deferred.promise();
@@ -57,15 +69,27 @@ window.view = {
 		return promise;
 	},
 	initDom: function(game2048) {
-		var $dom = this.$game;
-		$dom.empty().append(game2048.data.map(function(value, index) {
+
+		var $dom = this.$game,
+		self = this;
+		
+		self.blockSize = {
+			width: this.$game.width() / game2048.option.col,
+			height: this.$game.height() / game2048.option.row
+		};
+		self.moving = false;
+
+		$dom.find('.block').empty().append(game2048.data.map(function(value, index) {
+			return $("<div></div>").css(self.blockCss(game2048.xy(index)));
+		}));
+		$dom.find('.pieces').empty().append(game2048.data.map(function(value, index) {
 			return value ? this.createPiece(game2048.xy(index), value) : "";
 		}, this))
 		return this;
 	},
 	updateDom: function (game2048, obj) {
 		var self = this,
-			$dom = self.$game,
+			$dom = self.$game.find('.pieces'),
 			$added = self
 		.createPiece(game2048.xy(obj.added), game2048.data[obj.added])
 		.addClass('added');
@@ -103,7 +127,8 @@ window.view = {
 	init: function() {
 		this.$game = $(".game");
 		this.$score = $(".score");
-		this.moving = false;
+		this.$game.width(this.$game.width());
+		this.$game.height(this.$game.width());
 		this.load.resolve();
 	},
 	load: $.Deferred()
