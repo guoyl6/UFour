@@ -40,6 +40,12 @@
 	left: 10px;
 }
 
+@media screen and (max-width: 400px) {
+	.piece {
+		font-size: 12px;
+	}
+}
+
 @keyframes scaleIn
 {
     0%   {font-size: 0; opacity: 0;}
