@@ -272,7 +272,7 @@
     left: calc(var(--titleWidth) * -1);
 
     text-align: right;
-    font-size: 1.2em;
+    font-size: 1.1em;
 }
 
 .experience>.title:before {
